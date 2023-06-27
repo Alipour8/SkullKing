@@ -1,61 +1,39 @@
-#include "Card.h"
-Card::Card(int value, string name) {
-    this->Value=value;
-    this->Name=name;
-}
-Card::Card(const Card &C1) {
-    this->Value=C1.Value;
-    this->Name=C1.Name;
-}
-Card::Card() {
-    string card_name[4]{"Treasure","Map","Parrot","Pirate_Flag"};
-    int number[8] = { 1,2,3,4,5,6,7,8 };
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            Card temp(number[i],card_name[j]);
-            cards.push_back(temp);
-        }
-    }
-    srand(time(NULL));
-    Card c1(0, "Skull");
-    Card c2(0, "Queen");
-    Card c3(0, "King");
-    cards.push_back(c1);
-    cards.push_back(c1);
-    cards.push_back(c1);
-    cards.push_back(c2);
-    cards.push_back(c2);
-    cards.push_back(c2);
-    cards.push_back(c3);
-    cards.push_back(c3);
-    cards.push_back(c3);
-    cards.push_back(c3);
-   list<Card>temp;
-    while (!cards.empty())
-    {
-        int x = rand();
-        x %= cards.size();
-        list<Card>::iterator it = cards.begin();
-        for (int j = 0; j < x; j++)
-            it++;
-        temp.push_back(*it);
-        cards.erase(it);
-    }
-    cards = temp;
-}
+#include "card.h"
+#include "ui_card.h"
 
-void Card:: setValue(int value){
-    this->Value=value;
+Card::Card(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Card)
+{
+    ui->setupUi(this);
 }
-void Card::setName(string name) {
-    this->Name=name;
+Card:: Card(int value,QString card_name,int card_number){
+    Value=value;
+    CardName=card_name;
+    CardNumber=card_number;
 }
-int Card::getValue() {
+Card::Card(int value,QString card_name){
+  Value=value;
+  CardName=card_name;
+}
+int Card::getValue(){
     return Value;
 }
-string Card::getName() {
-    return Name;
+Card:: Card(const Card& c){
+    Value=c.Value;
+    CardName=c.CardName;
+    CardNumber=c.CardNumber;
+}
+QString Card:: getCardName(){
+    return CardName;
+}
+Card::~Card()
+{
+    delete ui;
+}
+
+void Card::on_pushButton_clicked()
+{
+
 }
 
