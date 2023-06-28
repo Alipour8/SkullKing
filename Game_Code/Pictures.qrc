@@ -1,10 +1,8 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>gameGround.jpg</file>
-        <file>cardFrame.jpg</file>
-        <file>Fram.jpg</file>
         <file>GameBackground.jpg</file>
-        <file>CardFarm2.jpg</file>
         <file>Card/King.png</file>
+        <file>CardFrame.jpg</file>
     </qresource>
 </RCC>

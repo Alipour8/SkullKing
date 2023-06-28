@@ -18,6 +18,7 @@ public:
     explicit Player(QWidget *parent = nullptr);
     Player();
     Player(QString name,QString user_name,QString phone_number,QString email,QString password,int coin);
+    void Play();
 
     //copy constructor
     Player(const Player &p);

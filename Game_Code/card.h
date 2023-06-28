@@ -18,7 +18,7 @@ class Card : public QWidget
 
 public:
 //constructor
-    explicit Card(QWidget *parent = nullptr);
+   // explicit Card(QWidget *parent = nullptr);
     Card();
     Card(int value,QString card_name,int card_number);
     Card(int value,QString card_name);

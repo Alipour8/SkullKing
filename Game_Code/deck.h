@@ -12,9 +12,12 @@ class deck : public QWidget
     Q_OBJECT
 
 public:
-    explicit deck(QWidget *parent = nullptr);
+   // explicit deck(QWidget *parent = nullptr);
     list<Card>card_list;
     deck();
+    list<Card> getCardList();
+    pair<int,int> compareCard();
+
     ~deck();
 
 private:

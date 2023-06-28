@@ -1,11 +1,11 @@
 #include "card.h"
 #include "ui_card.h"
 
-Card::Card(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Card)
-{
-    ui->setupUi(this);
+
+Card::Card(){
+    Value=0;
+    CardName=" ";
+    CardNumber=0;
 }
 Card:: Card(int value,QString card_name,int card_number){
     Value=value;
@@ -29,7 +29,7 @@ QString Card:: getCardName(){
 }
 Card::~Card()
 {
-    delete ui;
+
 }
 
 void Card::on_pushButton_clicked()

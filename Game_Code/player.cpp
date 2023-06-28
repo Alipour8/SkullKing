@@ -1,6 +1,6 @@
 #include "player.h"
 #include "ui_player.h"
-
+#include "deck.h"
 Player::Player(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Player)
@@ -32,4 +32,11 @@ Player::Player(const Player &p) {
     this->Password = p.Password;
     this->Coin = p.Coin;
     this->Score = p.Score;
+}
+void Player::Play(){
+    deck d1;
+    d1.getCardList();
+    list<Card> temp;
+
+
 }
