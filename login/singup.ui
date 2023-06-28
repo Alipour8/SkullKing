@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>singup</class>
+ <widget class="QWidget" name="singup">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1401</width>
+    <height>1095</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>-20</x>
+     <y>10</y>
+     <width>1411</width>
+     <height>1071</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(1, 111, 134);</string>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>210</y>
+     <width>571</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/new/prefix1/sign up.jpg);
+background-image: url(:/new/prefix1/signup.jpg);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>20</y>
+     <width>241</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#label_2 {
+text-align: center;
+color: rgb(254, 208, 83);
+margin: 0 auto;
+font-size: 35px;
+font-family: 'Droid Sans';
+}
+
+QLabel#label_2:hover {
+	color: rgb(85, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Register</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="regLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>1381</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #fefefe;</string>
+   </property>
+   <property name="text">
+    <string>Please fill the form correctly.</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="usernameRegister">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>210</y>
+     <width>791</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit#usernameRegister {
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+background: #191970;
+color: #fefefe;
+}
+
+QLineEdit#usernameRegister:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	border-color: rgb(245, 179, 1);
+	color: rgb(241, 182, 88);
+}
+
+QLineEdit#usernameRegister:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>username</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="passwordRegister">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>350</y>
+     <width>801</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit#passwordRegister {
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+background: #191970;
+color: #fefefe;
+}
+
+QLineEdit#passwordRegister:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	border-color: rgb(245, 179, 1);
+	color: rgb(241, 182, 88);
+}
+
+QLineEdit#passwordRegister:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+   <property name="placeholderText">
+    <string>password</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="passwordRegister_2">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>470</y>
+     <width>791</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit#passwordRegister_2 {
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+background: #191970;
+color: #fefefe;
+}
+
+QLineEdit#passwordRegister_2:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	border-color: rgb(245, 179, 1);
+	color: rgb(241, 182, 88);
+}
+
+QLineEdit#passwordRegister_2:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+   <property name="placeholderText">
+    <string>Enter password again</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="firstnameRegister">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>640</y>
+     <width>791</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit#firstnameRegister {
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+background: #191970;
+color: #fefefe;
+}
+
+QLineEdit#firstnameRegister:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	border-color: rgb(245, 179, 1);
+	color: rgb(241, 182, 88);
+}
+
+QLineEdit#firstnameRegister:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>Name</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="emailRegister">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>770</y>
+     <width>791</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit#emailRegister {
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+background: #191970;
+color: #fefefe;
+}
+
+QLineEdit#emailRegister:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	border-color: rgb(245, 179, 1);
+	color: rgb(241, 182, 88);
+}
+
+QLineEdit#emailRegister:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>Email</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="phoneRegister">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>910</y>
+     <width>791</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit#phoneRegister {
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: 20px;
+background: #191970;
+color: #fefefe;
+}
+
+QLineEdit#phoneRegister:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	border-color: rgb(245, 179, 1);
+	color: rgb(241, 182, 88);
+}
+
+QLineEdit#phoneRegister:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>Phone</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>910</y>
+     <width>561</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#backButton {
+color: white;
+border-radius: 5px;
+Background: #933;
+color: #fefefe;
+font: 16pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QPushButton#backButton:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	color: rgb(241, 182, 88);
+}
+
+QPushButton#backButton:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Back to login</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="completeRegButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>820</y>
+     <width>561</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+QPushButton#completeRegButton {
+color: white;
+border-radius: 5px;
+Background: #393;
+color: #fefefe;
+font: 16pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QPushButton#completeRegButton:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	color: rgb(241, 182, 88);
+}
+
+QPushButton#completeRegButton:pressed {
+border-style: solid;
+border-width: 1px;
+	background-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>COMPLETE REGISTRATION</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="showpassforsignup">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>540</y>
+     <width>751</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox#showpassforsignup {
+padding-left: 10px;
+border-radius: 5px;
+color: #fefefe;
+}
+
+QCheckBox#showpassforsignup:hover {
+	color: rgb(241, 182, 88);
+}
+
+QCheckBox#showpassforsignup:pressed {
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Show passwords</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

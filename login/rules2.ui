@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>rules2</class>
+ <widget class="QWidget" name="rules2">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1016</width>
+    <height>709</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>50</y>
+     <width>811</width>
+     <height>571</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/new/prefix1/rules2.jpg);</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>20</y>
+     <width>221</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>40</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>630</y>
+     <width>151</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton {
+	background-color: rgb(3, 173, 190);
+	background-color: rgb(5, 167, 178);
+	font: 16pt &quot;MS Shell Dlg 2&quot;;
+Padding: 1px;
+Border-radius: 5px;
+background-color: rgb(241, 182, 88);
+color: rgb(25, 69, 105);
+}
+
+QPushButton#pushButton:hover {
+	background-color: rgb(42, 46, 52);
+border-style: solid;
+ border-width: 1px;
+	color: rgb(241, 182, 88);
+}
+
+QPushButton#pushButton:pressed {
+border-style: solid;
+border-width: 1px;
+	border-color: rgb(25, 69, 105);
+	color: rgb(85, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>next page</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
