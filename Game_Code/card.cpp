@@ -27,6 +27,9 @@ Card:: Card(const Card& c){
 QString Card:: getCardName(){
     return CardName;
 }
+void Card::setOwnerCard(int a){
+    OwnerCard=a;
+}
 Card::~Card()
 {
 

@@ -5,6 +5,7 @@
 #include <list>
 #include "card.h"
 #include <iostream>
+#include "deck.h"
 namespace Ui {
 class Player;
 }
@@ -19,6 +20,7 @@ public:
     Player();
     Player(QString name,QString user_name,QString phone_number,QString email,QString password,int coin);
     void Play();
+    void shareHand(deck &temp,int round);
 
     //copy constructor
     Player(const Player &p);
@@ -37,6 +39,7 @@ private:
     int PlayerNumber;
     list<Card> Hand;
     static int Id;
+    deck playerCard;
 };
 
 #endif // PLAYER_H

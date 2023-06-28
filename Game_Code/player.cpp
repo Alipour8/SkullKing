@@ -22,6 +22,7 @@ Player:: Player(QString name,QString user_name,QString phone_number,QString emai
     Id++;
     PlayerNumber=Id;
     Score=0;
+
 }
 int Player:: Id=0;
 Player::Player(const Player &p) {
@@ -32,6 +33,18 @@ Player::Player(const Player &p) {
     this->Password = p.Password;
     this->Coin = p.Coin;
     this->Score = p.Score;
+}
+void Player::shareHand(deck &temp,int round){
+    list<Card> tempCard;
+tempCard=temp.getCardList();
+list<Card>::iterator it;
+for(int i=0;i<2*round;i++){
+it=tempCard.begin();
+tempCard.front().setOwnerCard(PlayerNumber);
+Hand.push_back(tempCard.front());
+tempCard.erase(it);
+}
+
 }
 void Player::Play(){
     deck d1;

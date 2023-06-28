@@ -15,6 +15,7 @@ class Card : public QWidget
     int Value;
     QString CardName;
     int CardNumber;
+    int OwnerCard;
 
 public:
 //constructor
@@ -30,7 +31,7 @@ public:
 
 //setter & getter function
      int getValue();
-
+     void setOwnerCard(int a);
     ~Card();
 
 private slots:
