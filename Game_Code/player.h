@@ -21,7 +21,7 @@ public:
     Player(QString name,QString user_name,QString phone_number,QString email,QString password,int coin);
     void Play();
     void shareHand(deck &temp,int round);
-
+    void startGame();
     //copy constructor
     Player(const Player &p);
 

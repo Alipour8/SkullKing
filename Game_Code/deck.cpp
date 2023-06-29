@@ -39,6 +39,7 @@ deck::deck(){
    list<Card> temp;
        for (;!card_list.empty();)
        {
+           srand(time(NULL));
            int x = rand();
            x %= card_list.size();
            std::list<Card>::iterator it = card_list.begin();
