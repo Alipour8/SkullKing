@@ -23,7 +23,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(1, 111, 134);</string>
+    <string notr="true">background-color: rgb(1, 111, 134);
+border-image: url(:/new/prefix1/rulles_back.jpg);</string>
    </property>
    <property name="text">
     <string>TextLabel</string>

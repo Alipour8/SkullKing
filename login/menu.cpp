@@ -28,6 +28,8 @@ menu::~menu()
 void menu::on_logout_clicked()
 {
     close();
+    //log=new login();
+    //log->show();
 }
 
 void menu::on_setting_clicked()

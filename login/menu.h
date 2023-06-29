@@ -5,6 +5,7 @@
 #include"setting.h"
 #include"history.h"
 
+
 namespace Ui {
 class menu;
 }

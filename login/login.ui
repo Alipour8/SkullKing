@@ -39,7 +39,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
+    <string notr="true">border-image: url(:/new/prefix1/rulles_back.jpg);
 background-color: rgb(1, 111, 134);</string>
    </property>
    <property name="readOnly">
@@ -57,7 +57,7 @@ background-color: rgb(1, 111, 134);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel#label {
-	font: 26pt &quot;MS Shell Dlg 2&quot;;
+	font: 26pt &quot;Comic Sans MS&quot;;
 text-align: center;
 color: rgb(254, 208, 83);
 margin: 0 auto;

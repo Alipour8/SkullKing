@@ -23,22 +23,10 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QTextEdit#chart {
-Padding: 1px;
-Border-radius: 7px;
-Color: #fefefe;
-background-color: rgb(59, 63, 70);
-border-style: solid;
- border-width: 2px;
-}
-
-QTextEdit#chart:hover {
-background-color: rgb(1, 111, 134);
-border-style: solid;
- border-width: 2px;
-color: rgb(241, 182, 88);
-	border-color: rgb(45, 135, 135);
-}</string>
+    <string notr="true">border-image: url(:/new/prefix1/menu.jpg);</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -52,7 +40,7 @@ color: rgb(241, 182, 88);
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel#label {
-	font: 26pt &quot;MS Shell Dlg 2&quot;;
+	font: 26pt &quot;Comic Sans MS&quot;;
 text-align: center;
 color: rgb(254, 208, 83);
 margin: 0 auto;
@@ -219,14 +207,15 @@ border-width: 1px;
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>80</y>
+     <y>170</y>
      <width>531</width>
      <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 26pt &quot;MS Shell Dlg 2&quot;;
-border-color: rgb(0, 0, 255);</string>
+    <string notr="true">font: 20pt &quot;Comic Sans MS&quot;;
+
+color: rgb(85, 255, 0);</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
