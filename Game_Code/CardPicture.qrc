@@ -1,0 +1,39 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>King.jpg</file>
+        <file>Map1.jpg</file>
+        <file>Map2.jpg</file>
+        <file>Map3.jpg</file>
+        <file>Map4.jpg</file>
+        <file>Map5.jpg</file>
+        <file>Map6.jpg</file>
+        <file>Map7.jpg</file>
+        <file>Map8.jpg</file>
+        <file>Parrot1.jpg</file>
+        <file>Parrot2.jpg</file>
+        <file>Parrot3.jpg</file>
+        <file>Parrot4.jpg</file>
+        <file>Parrot5.jpg</file>
+        <file>Parrot6.jpg</file>
+        <file>Parrot7.jpg</file>
+        <file>Parrot8.jpg</file>
+        <file>PirateFlag1.jpg</file>
+        <file>PirateFlag2.jpg</file>
+        <file>PirateFlag3.jpg</file>
+        <file>PirateFlag4.jpg</file>
+        <file>PirateFlag5.jpg</file>
+        <file>PirateFlag6.jpg</file>
+        <file>PirateFlag7.jpg</file>
+        <file>PirateFlag8.jpg</file>
+        <file>Queen.jpg</file>
+        <file>TheGiant.jpg</file>
+        <file>Treasure1.jpg</file>
+        <file>Treasure2.jpg</file>
+        <file>Treasure3.jpg</file>
+        <file>Treasure4.jpg</file>
+        <file>Treasure5.jpg</file>
+        <file>Treasure6.jpg</file>
+        <file>Treasure7.jpg</file>
+        <file>Treasure8.jpg</file>
+    </qresource>
+</RCC>

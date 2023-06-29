@@ -2,7 +2,6 @@
     <qresource prefix="/new/prefix1">
         <file>gameGround.jpg</file>
         <file>GameBackground.jpg</file>
-        <file>Card/King.png</file>
         <file>CardFrame.jpg</file>
     </qresource>
 </RCC>

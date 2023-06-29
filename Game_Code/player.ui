@@ -1,21 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>Player</class>
  <widget class="QWidget" name="Player">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>513</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/new/prefix1/gameGround.jpg);</string>
+  </property>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>

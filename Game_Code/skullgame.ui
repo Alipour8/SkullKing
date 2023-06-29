@@ -17,8 +17,8 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>0</y>
+      <x>50</x>
+      <y>40</y>
       <width>1451</width>
       <height>811</height>
      </rect>
@@ -53,8 +53,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -76,8 +77,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -99,8 +101,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -122,8 +125,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -145,8 +149,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -168,8 +173,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -191,8 +197,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -214,8 +221,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -237,8 +245,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -260,8 +269,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -283,8 +293,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -306,8 +317,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -329,8 +341,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -352,8 +365,9 @@ border-left-color: rgb(0, 0, 127);
 border-right-color: rgb(0, 0, 127);
 border-top-color: rgb(0, 0, 127);
 border-color: rgb(0, 0, 127);
-border:5px solid blue;
-border-radius:10px;</string>
+border:5px solid rgb(0, 0, 103);;
+border-radius:10px;
+color: rgb(0, 0, 103);</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -363,7 +377,7 @@ border-radius:10px;</string>
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>80</y>
+      <y>90</y>
       <width>151</width>
       <height>191</height>
      </rect>
@@ -380,7 +394,7 @@ border-radius:10px;</string>
     <property name="geometry">
      <rect>
       <x>850</x>
-      <y>80</y>
+      <y>90</y>
       <width>151</width>
       <height>191</height>
      </rect>
@@ -396,10 +410,10 @@ border-radius:10px;</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>270</y>
-      <width>511</width>
-      <height>61</height>
+      <x>110</x>
+      <y>280</y>
+      <width>481</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -411,6 +425,7 @@ border-radius:10px;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-image: url(:/new/prefix1/GameBackground.jpg);
+border-image: url(:/new/prefix1/gameGround.jpg);
 alternate-background-color: rgb(0, 0, 0);
 color: rgb(11, 0, 73);
 color: rgb(85, 0, 255);
@@ -425,8 +440,8 @@ color: rgb(0, 0, 0);</string>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>281</y>
+      <x>590</x>
+      <y>280</y>
       <width>62</width>
       <height>51</height>
      </rect>
@@ -439,6 +454,7 @@ color: rgb(0, 0, 0);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-image: url(:/new/prefix1/GameBackground.jpg);
+border-image: url(:/new/prefix1/gameGround.jpg);
 color: rgb(0, 0, 0);
 border-radius:10px;</string>
     </property>
@@ -487,7 +503,7 @@ border-radius:10px;</string>
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>150</y>
+      <y>160</y>
       <width>113</width>
       <height>61</height>
      </rect>
@@ -501,17 +517,18 @@ border-radius:10px;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-image: url(:/new/prefix1/GameBackground.jpg);
+border-image: url(:/new/prefix1/gameGround.jpg);
 border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>My Card</string>
+     <string>  My Card</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_2">
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>150</y>
+      <y>160</y>
       <width>181</width>
       <height>61</height>
      </rect>
@@ -525,10 +542,133 @@ border-radius:10px;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-image: url(:/new/prefix1/GameBackground.jpg);
+border-image: url(:/new/prefix1/gameGround.jpg);
 border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>My Rival Card</string>
+     <string>  My Rival Card</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>110</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/gameGround.jpg);
+color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>   IP :</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>110</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/gameGround.jpg);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>110</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/gameGround.jpg);</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_16">
+    <property name="geometry">
+     <rect>
+      <x>1380</x>
+      <y>100</y>
+      <width>71</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/gameGround.jpg);
+color: rgb(0, 0, 0);
+border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_17">
+    <property name="geometry">
+     <rect>
+      <x>1380</x>
+      <y>160</y>
+      <width>71</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/gameGround.jpg);
+color: rgb(0, 0, 0);
+border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_15">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>160</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
     </property>
    </widget>
   </widget>

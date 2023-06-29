@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT       +=network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -12,18 +12,21 @@ SOURCES += \
     card.cpp \
     deck.cpp \
     main.cpp \
+    playclient.cpp \
     player.cpp \
     skullgame.cpp
 
 HEADERS += \
     card.h \
     deck.h \
+    playclient.h \
     player.h \
     skullgame.h
 
 FORMS += \
     card.ui \
     deck.ui \
+    playclient.ui \
     player.ui \
     skullgame.ui
 
@@ -33,4 +36,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    CardPicture.qrc \
     Pictures.qrc
