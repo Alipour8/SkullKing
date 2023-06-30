@@ -5,6 +5,7 @@
 #include<QList>
 #include<QByteArray>
 #include<QDataStream>
+#include<QPixmap>
 SkullGame::SkullGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::SkullGame)
@@ -65,6 +66,11 @@ if(socket){
 
         QByteArray byteArray=temp.toUtf8();
         socketstream<<byteArray;
+        //
+        QPixmap pixmap("D:/SkullKing_Pat-Mat_19/login/Parrot1.jpg");
+        QIcon ButtonIcon(pixmap);
+        ui->pushButton_14->setIcon(ButtonIcon);
+        ui->pushButton_14->setIconSize(QSize(130,330));
     }
 }
 }

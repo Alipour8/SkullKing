@@ -362,7 +362,7 @@ border-radius:10px;
 color: rgb(0, 0, 103);</string>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
