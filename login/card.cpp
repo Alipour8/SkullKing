@@ -1,6 +1,4 @@
 #include "card.h"
-#include "ui_card.h"
-
 
 Card::Card(){
     Value=0;
@@ -30,12 +28,10 @@ QString Card:: getCardName(){
 void Card::setOwnerCard(int a){
     OwnerCard=a;
 }
-Card::~Card()
-{
-
+int Card::getCardNumber(){
+    return CardNumber;
 }
-
-void Card::on_pushButton_clicked()
+Card::~Card()
 {
 
 }

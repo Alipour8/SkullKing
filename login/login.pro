@@ -19,7 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     card.cpp \
     connecttoserver.cpp \
-    deck.cpp \
+    deckcard.cpp \
     forgetpassword.cpp \
     history.cpp \
     main.cpp \
@@ -27,7 +27,6 @@ SOURCES += \
     maindatabase.cpp \
     menu.cpp \
     playclient.cpp \
-    player.cpp \
     rules.cpp \
     rules2.cpp \
     rules3.cpp \
@@ -41,14 +40,13 @@ SOURCES += \
 HEADERS += \
     card.h \
     connecttoserver.h \
-    deck.h \
+    deckcard.h \
     forgetpassword.h \
     history.h \
     login.h \
     maindatabase.h \
     menu.h \
     playclient.h \
-    player.h \
     rules.h \
     rules2.h \
     rules3.h \
@@ -60,14 +58,11 @@ HEADERS += \
     user.h
 
 FORMS += \
-    card.ui \
-    deck.ui \
     forgetpassword.ui \
     history.ui \
     login.ui \
     menu.ui \
     playclient.ui \
-    player.ui \
     rules.ui \
     rules2.ui \
     rules3.ui \

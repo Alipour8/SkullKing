@@ -6,6 +6,8 @@
 #include<QByteArray>
 #include<QDataStream>
 #include<QPixmap>
+#include "deckcard.h"
+
 SkullGame::SkullGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::SkullGame)
@@ -56,10 +58,104 @@ void SkullGame::readSocket(){
     ui->textEdit_3->setText(Buffer);
 
 }
+DeckCard Deck;
+int roundgame=4;
 void SkullGame::on_pushButton_15_clicked()
 {
-if(socket){
+    QPushButton **btnlist=new QPushButton *[14];
+    btnlist[0]=ui->btn1;
+    btnlist[1]=ui->btn2;
+    btnlist[2]=ui->btn3;
+    btnlist[3]=ui->btn4;
+    btnlist[4]=ui->btn5;
+    btnlist[5]=ui->btn6;
+    btnlist[6]=ui->btn7;
+    btnlist[7]=ui->btn8;
+    btnlist[8]=ui->btn9;
+    btnlist[9]=ui->btn10;
+    btnlist[10]=ui->btn11;
+    btnlist[11]=ui->btn12;
+    btnlist[12]=ui->btn13;
+    btnlist[13]=ui->btn14;
+
     if(socket->isOpen()){
+        ui->pushButton_15->setDisabled(true);
+        for(int i=1;i<=2*roundgame;i++){
+                    Card tmp=Deck.card_list.front();
+                    Deck.card_list.erase(Deck.card_list.begin());
+                    QString type=tmp.getCardName();
+                    int value=tmp.getCardNumber();
+                    if(type=="PirateFalg" && value ==1)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag1.jpg);\n");
+                    if(type=="PirateFalg" && value ==2)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag2.jpg);\n");
+                    if(type=="PirateFalg" && value ==3)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag3.jpg);\n");
+                    if(type=="PirateFalg" && value ==4)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag4.jpg);\n");
+                    if(type=="PirateFalg" && value ==5)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag5.jpg);\n");
+                    if(type=="PirateFalg" && value ==6)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag6.jpg);\n");
+                    if(type=="PirateFalg" && value ==7)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag7.jpg);\n");
+                    if(type=="PirateFalg" && value ==8)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag8.jpg);\n");
+                    if(type=="Parrot" && value ==1)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot1.jpg);\n");
+                    if(type=="Parrot" && value ==2)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot2.jpg);\n");
+                    if(type=="Parrot" && value ==3)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot3.jpg);\n");
+                    if(type=="Parrot" && value ==4)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot4.jpg);\n");
+                    if(type=="Parrot" && value ==5)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot5.jpg);\n");
+                    if(type=="Parrot" && value ==6)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot6.jpg);\n");
+                    if(type=="Parrot" && value ==7)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot7.jpg);\n");
+                    if(type=="Parrot" && value ==8)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Parrot8.jpg);\n");
+                    if(type=="Map" && value ==1)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map1.jpg);\n");
+                    if(type=="Map" && value ==2)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map2.jpg);\n");
+                    if(type=="Map" && value ==3)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map3.jpg);\n");
+                    if(type=="Map" && value ==4)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map4.jpg);\n");
+                    if(type=="Map" && value ==5)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map5.jpg);\n");
+                    if(type=="Map" && value ==6)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map6.jpg);\n");
+                    if(type=="Map" && value ==7)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map7.jpg);\n");
+                    if(type=="Map" && value ==8)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Map8.jpg);\n");
+                    if(type=="Treasure" && value ==1)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure1.jpg);\n");
+                    if(type=="Treasure" && value ==2)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure2.jpg);\n");
+                    if(type=="Treasure" && value ==3)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure3.jpg);\n");
+                    if(type=="Treasure" && value ==4)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure4.jpg);\n");
+                    if(type=="Treasure" && value ==5)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure5.jpg);\n");
+                    if(type=="Treasure" && value ==6)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure6.jpg);\n");
+                    if(type=="Treasure" && value ==7)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure7.jpg);\n");
+                    if(type=="Treasure" && value ==8)
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Treasure8.jpg);\n");
+                    if(type=="King")
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/King.jpg);\n");
+                    if(type=="Queen")
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/Queen.jpg);\n");
+                    if(type=="Pirate")
+                    btnlist[i-1]->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");
+                }
         QString temp="Hello server";
         QDataStream socketstream(socket);
         socketstream.setVersion(QDataStream::Qt_5_15);
@@ -67,11 +163,7 @@ if(socket){
         QByteArray byteArray=temp.toUtf8();
         socketstream<<byteArray;
         //
-        QPixmap pixmap("D:/SkullKing_Pat-Mat_19/login/Parrot1.jpg");
-        QIcon ButtonIcon(pixmap);
-        ui->pushButton_14->setIcon(ButtonIcon);
-        ui->pushButton_14->setIconSize(QSize(130,330));
-    }
-}
-}
 
+    }
+
+}
