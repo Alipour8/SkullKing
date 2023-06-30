@@ -17,13 +17,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    card.cpp \
     connecttoserver.cpp \
+    deck.cpp \
     forgetpassword.cpp \
     history.cpp \
     main.cpp \
     login.cpp \
     maindatabase.cpp \
     menu.cpp \
+    playclient.cpp \
+    player.cpp \
     rules.cpp \
     rules2.cpp \
     rules3.cpp \
@@ -31,15 +35,20 @@ SOURCES += \
     rules5.cpp \
     setting.cpp \
     singup.cpp \
+    skullgame.cpp \
     user.cpp
 
 HEADERS += \
+    card.h \
     connecttoserver.h \
+    deck.h \
     forgetpassword.h \
     history.h \
     login.h \
     maindatabase.h \
     menu.h \
+    playclient.h \
+    player.h \
     rules.h \
     rules2.h \
     rules3.h \
@@ -47,20 +56,26 @@ HEADERS += \
     rules5.h \
     setting.h \
     singup.h \
+    skullgame.h \
     user.h
 
 FORMS += \
+    card.ui \
+    deck.ui \
     forgetpassword.ui \
     history.ui \
     login.ui \
     menu.ui \
+    playclient.ui \
+    player.ui \
     rules.ui \
     rules2.ui \
     rules3.ui \
     rules4.ui \
     rules5.ui \
     setting.ui \
-    singup.ui
+    singup.ui \
+    skullgame.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -24,7 +24,7 @@ login::login(QWidget *parent)
 
        setWindowTitle("Skull king");
 
-       setFixedSize(1280, 1280);
+       //setFixedSize(1402, 2472);
 
        //singup=new class singup;
        rules=new class rules;

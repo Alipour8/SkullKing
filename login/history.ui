@@ -27,6 +27,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QTextEdit#chart {
+	border-image: url(:/new/prefix1/rulles_back.jpg);
 Padding: 1px;
 Border-radius: 7px;
 Color: #fefefe;

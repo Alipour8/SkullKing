@@ -13,7 +13,7 @@ singup::singup(QWidget *parent) :
 
 
     setWindowTitle("Sign up/Skull king");
-    //setFixedSize(1237, 1247);
+    //setFixedSize(1431, 1091);
 }
 
 singup::~singup()

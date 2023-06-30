@@ -6,5 +6,8 @@
         <file>forget password.jpg</file>
         <file>rulles_back.jpg</file>
         <file>menu.jpg</file>
+        <file>gameGround.jpg</file>
+        <file>GameBackground.jpg</file>
+        <file>CardFrame.jpg</file>
     </qresource>
 </RCC>
