@@ -24,6 +24,7 @@ public slots:
 private slots:
     void on_pushButton_15_clicked();
 
+
 private:
     Ui::SkullGame *ui;
     QTcpServer *server;

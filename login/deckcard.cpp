@@ -14,27 +14,27 @@ DeckCard::DeckCard(){
      for(int i=0;i<4;i++){
         card_list.push_back(Pirate);
     }
-    for(int i=0;i<8;i++){
+    for(int i=1;i<=8;i++){
     Card Parrot(1,"Parrot",i);
     card_list.push_back(Parrot);
     }
-    for(int i=0;i<8;i++){
+    for(int i=1;i<=8;i++){
     Card Map(1,"Map",i);
     card_list.push_back(Map);
     }
-    for(int i=0;i<8;i++){
+    for(int i=1;i<=8;i++){
     Card Treasure(1,"Treasure",i);
     card_list.push_back(Treasure);
     }
-   for(int i=0;i<8;i++){
+   for(int i=1;i<=8;i++){
        Card PirateFlag(2,"PirateFlag",i);
        card_list.push_back(PirateFlag);
    }
    QList<Card> temp;
-
+srand(time(NULL));
        for (;!card_list.empty();)
        {
-srand(time(NULL));
+
            int x = rand();
            x %= card_list.size();
            QList<Card>::iterator it = card_list.begin();
