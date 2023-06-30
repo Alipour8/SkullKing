@@ -66,7 +66,7 @@ void SkullGame::on_pushButton_15_clicked()
     ui->pushButton->setEnabled(true);
     ui->comboBox->setEnabled(true);
     QStringList num;
-    for(int i=0;i<2*roundgame;i++)
+    for(int i=0;i<=2*roundgame;i++)
         num.push_back(QString::number(i));
     ui->comboBox->addItems(num);
 
@@ -87,7 +87,8 @@ void SkullGame::on_pushButton_15_clicked()
 
     if(socket->isOpen()){
         ui->pushButton_15->setDisabled(true);
-        for(int i=0;i<2*roundgame;i++){
+        int i=0;
+        for(;i<2*roundgame;i++){
                     Card tmp=Deck.card_list.front();
                     Deck.card_list.erase(Deck.card_list.begin());
                     QString type=tmp.getCardName();
@@ -165,7 +166,7 @@ void SkullGame::on_pushButton_15_clicked()
 
                 }
 
-        for(int i=0;i<14;i++){
+        for(;i<14;i++){
             btnlist[i]->hide();
 
         }
