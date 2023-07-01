@@ -204,6 +204,7 @@ void maindatabase::Modify_UserDetails( user in_user )
     Db.close() ;
 }
 
+
 bool maindatabase::userpasswordForforgot(user in_user, QString &pass)
 {
     QFile Db("MainDatabase.json") ;

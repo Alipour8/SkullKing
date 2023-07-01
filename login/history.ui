@@ -263,44 +263,6 @@ border-width: 1px;
     <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="usernameforforgetpass">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>160</y>
-     <width>431</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit#usernameforforgetpass {
-	font: 16pt &quot;MS Shell Dlg 2&quot;;
-padding-left: 20px;
-padding-right: 20px;
-border-radius: 20px;
-background: #191970;
-color: #fefefe;
-}
-
-QLineEdit#usernameforforgetpass:hover {
-	background-color: rgb(42, 46, 52);
-border-style: solid;
- border-width: 1px;
-	border-color: rgb(245, 179, 1);
-	color: rgb(241, 182, 88);
-}
-
-QLineEdit#usernameforforgetpass:pressed {
-border-style: solid;
-border-width: 1px;
-	background-color: rgb(25, 69, 105);
-	color: rgb(85, 255, 255);
-}</string>
-   </property>
-   <property name="placeholderText">
-    <string>Please enter username</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>

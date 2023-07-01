@@ -34,12 +34,14 @@ history::~history()
 
 void history::on_show_clicked()
 {
+        //ui->usernameforforgetpass->hide();
         user his;
         //QString win, pass1, phone, username,lose;
         QString username;
         int win,lose;
         QString Win,Lose;
-        username = ui->usernameforforgetpass->text();
+        //username = ui->usernameforforgetpass->text();
+
         //phone = ui->phoneforforgetpass->text();
         his.set_UserName(username);
         //forgetpass.set_PhoneNumber(phone);

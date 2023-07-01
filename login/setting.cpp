@@ -17,6 +17,15 @@ setting::setting(user me,QWidget *parent) :
     howAmI=me;
 }
 
+setting::setting(QString name,QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::setting)
+{
+    ui->setupUi(this);
+    setWindowTitle("Menu");
+    this->name=name;
+}
+
 setting::~setting()
 {
     delete ui;
@@ -104,3 +113,12 @@ void setting::on_backbtn_clicked()
     this->hide();
 
 }
+
+void setting::on_showpassforeditprofile_stateChanged(int arg1)
+{
+    if(arg1)
+           ui->passwordeditprofile->setEchoMode(QLineEdit::Normal);
+       else
+           ui->passwordeditprofile->setEchoMode(QLineEdit::Password);
+}
+

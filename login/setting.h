@@ -18,12 +18,15 @@ class setting : public QWidget
 public:
     explicit setting(QWidget *parent = nullptr);
     setting(user me,QWidget *parent = nullptr);
+    setting(QString name,QWidget *parent = nullptr);
     ~setting();
 
 private slots:
     void on_savebtn_clicked();
 
     void on_backbtn_clicked();
+
+    void on_showpassforeditprofile_stateChanged(int arg1);
 
 private:
     Ui::setting *ui;
