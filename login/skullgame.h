@@ -29,6 +29,8 @@ private slots:
 
     void on_btn1_clicked();
 
+    void on_btn2_clicked();
+
 private:
     Ui::SkullGame *ui;
     QTcpServer *server;

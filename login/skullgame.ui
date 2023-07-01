@@ -544,7 +544,7 @@ border-radius:10px;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="RivalCard">
    <property name="geometry">
     <rect>
      <x>840</x>
