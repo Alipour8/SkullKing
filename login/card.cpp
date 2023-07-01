@@ -25,11 +25,15 @@ Card:: Card(const Card& c){
 QString Card:: getCardName(){
     return CardName;
 }
-void Card::setOwnerCard(int a){
-    OwnerCard=a;
-}
+
 int Card::getCardNumber(){
     return CardNumber;
+}
+void Card:: setOwnerCard(QString owner_card){
+   OwnerCard=owner_card;
+}
+QString Card:: getOwnerCard(){
+    return OwnerCard;
 }
 Card::~Card()
 {

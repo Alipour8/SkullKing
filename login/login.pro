@@ -21,6 +21,7 @@ SOURCES += \
     connecttoserver.cpp \
     deckcard.cpp \
     forgetpassword.cpp \
+    groundgame.cpp \
     history.cpp \
     main.cpp \
     login.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     connecttoserver.h \
     deckcard.h \
     forgetpassword.h \
+    groundgame.h \
     history.h \
     login.h \
     maindatabase.h \

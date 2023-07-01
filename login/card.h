@@ -9,7 +9,7 @@ class Card
 {int Value;
     QString CardName;
     int CardNumber;
-    int OwnerCard;
+    QString OwnerCard;
 
 public:
 //constructor
@@ -19,13 +19,16 @@ public:
 
 //copy constructor
     Card(const Card& );
-    QString getCardName();
+
 
 
 
 //setter & getter function
+    void setOwnerCard(QString owner_card);
+    QString getOwnerCard();
      int getValue();
      int getCardNumber();
+    QString getCardName();
      void setOwnerCard(int a);
     ~Card();
 
