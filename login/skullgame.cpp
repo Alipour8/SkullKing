@@ -8,11 +8,17 @@
 #include<QPixmap>
 #include<QThread>
 #include "deckcard.h"
-
+using namespace std;
 bool Confirm2=false;
-int HandTakenServer;
+bool clientPlayed=false;
+
+int HandCanTakeServer;
+int HandTekenServer=0;
+int ScoreServer=0;
+int counter=0;
+int j=0;
 DeckCard Deck;
-int roundgame=7;
+int roundgame=1;
 QList<QString> HandServer;
 QList<QString>::Iterator itServer;
 QPushButton **btnlist=new QPushButton *[14];
@@ -295,7 +301,117 @@ void SkullGame::on_pushButton_clicked()
             }
         }
     }
-    HandTakenServer=ui->comboBox->itemText(ui->comboBox->currentIndex()).toInt();
+    HandCanTakeServer=ui->comboBox->itemText(ui->comboBox->currentIndex()).toInt();
 
+}
+
+
+void SkullGame::on_btn1_clicked()
+{
+    if(!clientPlayed){
+        itServer=HandServer.begin();
+
+        QString cardData="Play "+*itServer+" ";
+        if(socket){
+
+            if(socket->isOpen()){
+                QDataStream socketstream(socket);
+                socketstream.setVersion(QDataStream::Qt_5_15);
+                QByteArray byteArray = cardData.toUtf8();
+                socketstream<<byteArray;
+                socket->waitForBytesWritten(6000);
+
+            }
+        }
+        btnlist[0]=ui->btn1;
+        btnlist[1]=ui->btn2;
+        btnlist[2]=ui->btn3;
+        btnlist[3]=ui->btn4;
+        btnlist[4]=ui->btn5;
+        btnlist[5]=ui->btn6;
+        btnlist[6]=ui->btn7;
+        btnlist[7]=ui->btn8;
+        btnlist[8]=ui->btn9;
+        btnlist[9]=ui->btn10;
+        btnlist[10]=ui->btn11;
+        btnlist[11]=ui->btn12;
+        btnlist[12]=ui->btn13;
+        btnlist[13]=ui->btn14;
+        for(int i=0;i<14;i++)
+           btnlist[i]->setDisabled(true);
+
+        btnlist[0]->hide();
+        if(*itServer=="PirateFlag 1")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag1.jpg);\n");
+        if(*itServer=="PirateFlag 2")
+       ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag2.jpg);\n");
+        if(*itServer=="PirateFlag 3")
+       ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag3.jpg);\n");
+        if(*itServer=="PirateFlag 4")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag4.jpg);\n");
+        if(*itServer=="PirateFlag 5")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag5.jpg);\n");
+        if(*itServer=="PirateFlag 6")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag6.jpg);\n");
+        if(*itServer=="PirateFlag 7")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag7.jpg);\n");
+        if(*itServer=="PirateFlag 8")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag8.jpg);\n");
+        if(*itServer=="Parrot 1")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot1.jpg);\n");
+        if(*itServer=="Parrot 2")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot2.jpg);\n");
+        if(*itServer=="Parrot 3")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot3.jpg);\n");
+        if(*itServer=="Parrot 4")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot4.jpg);\n");
+        if(*itServer=="Parrot 5")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot5.jpg);\n");
+        if(*itServer=="Parrot 6")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot6.jpg);\n");
+        if(*itServer=="Parrot 7")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot7.jpg);\n");
+        if(*itServer=="Parrot 8")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Parrot8.jpg);\n");
+        if(*itServer=="Map 1")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map1.jpg);\n");
+        if(*itServer=="Map 2")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map2.jpg);\n");
+        if(*itServer=="Map 3")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map3.jpg);\n");
+        if(*itServer=="Map 4")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map4.jpg);\n");
+        if(*itServer=="Map 5")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map5.jpg);\n");
+        if(*itServer=="Map 6")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map6.jpg);\n");
+        if(*itServer=="Map 7")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map7.jpg);\n");
+        if(*itServer=="Map 8")
+         ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Map8.jpg);\n");
+        if(*itServer=="Treasure 1")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure1.jpg);\n");
+        if(*itServer=="Treasure 2")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure2.jpg);\n");
+        if(*itServer=="Treasure 3")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure3.jpg);\n");
+        if(*itServer=="Treasure 4")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure4.jpg);\n");
+        if(*itServer=="Treasure 5")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure5.jpg);\n");
+        if(*itServer=="Treasure 6")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure6.jpg);\n");
+        if(*itServer=="Treasure 7")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure7.jpg);\n");
+        if(*itServer=="Treasure 8")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure8.jpg);\n");
+        if(*itServer=="King")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/King.jpg);\n");
+        if(*itServer=="Queen")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/Queen.jpg);\n");
+        if(*itServer=="Pirate")
+        ui->myCard->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");
+
+    }
 }
 
