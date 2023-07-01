@@ -176,7 +176,7 @@ void PlayClient::readsocket(){
             btnlist1[i]->setEnabled(true);
         return;
     }
-    if(cardData[0]=="play"){
+    if(cardData[0]=="Play"){
         btnlist1[0]=ui->btn1;
         btnlist1[1]=ui->btn2;
         btnlist1[2]=ui->btn3;
@@ -284,6 +284,7 @@ void PlayClient::on_pushButton_18_clicked()
 
 void PlayClient::on_pushButton_clicked()
 {
+    if(ConfirmClient){
     btnlist1[0]=ui->btn1;
     btnlist1[1]=ui->btn2;
     btnlist1[2]=ui->btn3;
@@ -298,10 +299,51 @@ void PlayClient::on_pushButton_clicked()
     btnlist1[11]=ui->btn12;
     btnlist1[12]=ui->btn13;
     btnlist1[13]=ui->btn14;
-    ui->comboBox->setEnabled(true);
-    ui->pushButton->setEnabled(true);
+    ui->comboBox->setDisabled(true);
+    ui->pushButton->setDisabled(true);
     for(int i=0;i<14;i++){
         btnlist1[i]->setEnabled(true);
     }
+    QString temp="NotConfirm";
+    if(socket){
+        if(socket->isOpen()){
+            QDataStream socketstream(socket);
+            socketstream.setVersion(QDataStream::Qt_5_15);
+            QByteArray byteArray = temp.toUtf8();
+            socketstream<<byteArray;
+            socket->waitForBytesWritten(6000);
+
+        }
+    }
+    if(roundgame2==1){
+        QString server="server";
+        if(socket){
+            if(socket->isOpen()){
+                QDataStream socketstream(socket);
+                socketstream.setVersion(QDataStream::Qt_5_15);
+                QByteArray byteArray = server.toUtf8();
+                socketstream<<byteArray;
+                socket->waitForBytesWritten(6000);
+
+            }
+        }
+        for(int i=0;i<14;i++)
+            btnlist1[i]->setDisabled(true);
+    }
+}
+    else{
+        QString tmp="Confirm";
+        if(socket){
+            if(socket->isOpen()){
+                QDataStream socketstream(socket);
+                socketstream.setVersion(QDataStream::Qt_5_15);
+                QByteArray byteArray = tmp.toUtf8();
+                socketstream<<byteArray;
+                socket->waitForBytesWritten(6000);
+
+            }
+        }
+    }
+    HandTakenClient=ui->comboBox->itemText(ui->comboBox->currentIndex()).toInt();
 }
 
