@@ -7,7 +7,10 @@
 #include<QDataStream>
 #include<QPixmap>
 #include "deckcard.h"
-
+bool Confirm2=false;
+int HandTakenServer;
+QList<QString> HandServer;
+QList<QString>::Iterator itServer;
 SkullGame::SkullGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::SkullGame)
@@ -39,7 +42,9 @@ SkullGame::~SkullGame()
     delete ui;
 }
 
-
+DeckCard Deck;
+int roundgame=2;
+QPushButton **btnlist=new QPushButton *[14];
 void SkullGame::connection(){
     while(server->hasPendingConnections()){
         socket=server->nextPendingConnection();
@@ -55,12 +60,30 @@ void SkullGame::readSocket(){
     socketStream.setVersion(QDataStream::Qt_5_15);
     socketStream.startTransaction();
     socketStream>>Buffer;
-    ui->textEdit_3->setText(Buffer);
+    QStringList cardData=QString(Buffer).split(" ");
+    if(cardData[0]=="server"){
+        btnlist[0]=ui->btn1;
+        btnlist[1]=ui->btn2;
+        btnlist[2]=ui->btn3;
+        btnlist[3]=ui->btn4;
+        btnlist[4]=ui->btn5;
+        btnlist[5]=ui->btn6;
+        btnlist[6]=ui->btn7;
+        btnlist[7]=ui->btn8;
+        btnlist[8]=ui->btn9;
+        btnlist[9]=ui->btn10;
+        btnlist[10]=ui->btn11;
+        btnlist[11]=ui->btn12;
+        btnlist[12]=ui->btn13;
+        btnlist[13]=ui->btn14;
+        for(int i=0;i<14;i++)
+            btnlist[i]->setEnabled(true);
+    }
+
+   // ui->textEdit_3->setText(Buffer);
 
 }
-DeckCard Deck;
-int roundgame=2;
-QPushButton **btnlist=new QPushButton *[14];
+
 void SkullGame::on_pushButton_15_clicked()
 {
     ui->pushButton->setEnabled(true);
@@ -166,10 +189,9 @@ void SkullGame::on_pushButton_15_clicked()
 
                 }
 
-        for(;i<14;i++){
+        for(;i<14;i++)
             btnlist[i]->hide();
 
-        }
         QString CardInHand="CardInHand ";
         for(int i=0;i<2*roundgame;i++){
             Card temp=Deck.card_list.front();
@@ -177,19 +199,82 @@ void SkullGame::on_pushButton_15_clicked()
             CardInHand=CardInHand+temp.getCardName()+" ";
             int val=temp.getCardNumber();
             CardInHand=CardInHand+QString::number(val)+" ";
-        }
+
+
         if(socket){
 
+            if(socket->isOpen()){
+                QDataStream socketstream(socket);
+                socketstream.setVersion(QDataStream::Qt_5_15);
+                QByteArray byteArray = CardInHand.toUtf8();
+                socketstream<<byteArray;
+                socket->waitForBytesWritten(6000);
 
-        QString temp="Hello server";
-        QDataStream socketstream(socket);
-        socketstream.setVersion(QDataStream::Qt_5_15);
+            }
+       // QString temp="Hello server";
+        //QDataStream socketstream(socket);
+        //socketstream.setVersion(QDataStream::Qt_5_15);
 
-        QByteArray byteArray=temp.toUtf8();
-        socketstream<<byteArray;
+        //QByteArray byteArray=temp.toUtf8();
+       // socketstream<<byteArray;
         //
-
+}
     }
 
 }
 }
+
+void SkullGame::on_pushButton_clicked()
+{
+    if(Confirm2){
+        btnlist[0]=ui->btn1;
+        btnlist[1]=ui->btn2;
+        btnlist[2]=ui->btn3;
+        btnlist[3]=ui->btn4;
+        btnlist[4]=ui->btn5;
+        btnlist[5]=ui->btn6;
+        btnlist[6]=ui->btn7;
+        btnlist[7]=ui->btn8;
+        btnlist[8]=ui->btn9;
+        btnlist[9]=ui->btn10;
+        btnlist[10]=ui->btn11;
+        btnlist[11]=ui->btn12;
+        btnlist[12]=ui->btn13;
+        btnlist[13]=ui->btn14;
+        ui->comboBox->setDisabled(true);
+        ui->pushButton->setDisabled(true);
+        for(int i=0;i<14;i++)
+            btnlist[i]->setEnabled(true);
+        QString tmp="NotConfirm";
+        if(socket){
+
+            if(socket->isOpen()){
+                QDataStream socketstream(socket);
+                socketstream.setVersion(QDataStream::Qt_5_15);
+                QByteArray byteArray = tmp.toUtf8();
+                socketstream<<byteArray;
+                socket->waitForBytesWritten(6000);
+
+            }
+        }
+
+
+    }
+    else{
+        QString tmp="Confirm";
+        if(socket){
+
+            if(socket->isOpen()){
+                QDataStream socketstream(socket);
+                socketstream.setVersion(QDataStream::Qt_5_15);
+                QByteArray byteArray = tmp.toUtf8();
+                socketstream<<byteArray;
+                socket->waitForBytesWritten(6000);
+
+            }
+        }
+    }
+    HandTakenServer=ui->comboBox->itemText(ui->comboBox->currentIndex()).toInt();
+
+}
+
