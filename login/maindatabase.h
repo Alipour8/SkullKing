@@ -18,6 +18,7 @@ public:
     static void Modify_UserDetails( user in_user );
     bool userpasswordForforgot(user in_user, QString &pass);
     bool showhistory(user in_user, int &wins,int &loses);
+    bool showhistory(QString name, int &wins,int &loses);
 };
 
 #endif // MAINDATABASE_H

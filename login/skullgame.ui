@@ -687,7 +687,7 @@ border-radius:10px;</string>
     <string>  Score:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
+  <widget class="QLabel" name="lblscore">
    <property name="geometry">
     <rect>
      <x>1080</x>
@@ -735,7 +735,7 @@ border-radius:10px;</string>
     <string>  Hand:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
+  <widget class="QLabel" name="lblhandtaken">
    <property name="geometry">
     <rect>
      <x>1080</x>

@@ -17,6 +17,7 @@ class history : public QWidget
 public:
     explicit history(QWidget *parent = nullptr);
     history(user me,QWidget *parent = nullptr);
+    history(QString name,QWidget *parent = nullptr);
     ~history();
 
 private slots:

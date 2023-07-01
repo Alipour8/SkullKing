@@ -167,6 +167,32 @@ void SkullGame::readSocket(){
 
     }
 
+    if(cardData[0]=="serverwin"){
+        HandTekenServer++;
+        ScoreServer+=cardData[1].toInt();
+        ui->lblhandtaken->setText(QString::number(HandTekenServer));
+        ui->lblscore->setText(QString::number(ScoreServer));
+        btnlist[0]=ui->btn1;
+        btnlist[1]=ui->btn2;
+        btnlist[2]=ui->btn3;
+        btnlist[3]=ui->btn4;
+        btnlist[4]=ui->btn5;
+        btnlist[5]=ui->btn6;
+        btnlist[6]=ui->btn7;
+        btnlist[7]=ui->btn8;
+        btnlist[8]=ui->btn9;
+        btnlist[9]=ui->btn10;
+        btnlist[10]=ui->btn11;
+        btnlist[11]=ui->btn12;
+        btnlist[12]=ui->btn13;
+        btnlist[13]=ui->btn14;
+        for(int i=0;i<14;i++)
+            btnlist[i]->setEnabled(true);
+    }
+    if(cardData[0]=="clientwin"){
+        ui->lblhandtaken->setText(QString::number(HandTekenServer));
+        ui->lblscore->setText(QString::number(ScoreServer));
+    }
 
    // ui->textEdit_3->setText(Buffer);
 
@@ -187,6 +213,11 @@ void sendmassageserver(QString str,QTcpSocket*socket){
 
 void SkullGame::on_pushButton_15_clicked()
 {
+    if(j+1==2*roundgame){
+        if(counter)
+            roundgame++;
+    counter++;
+    j=0;
     ui->pushButton->setEnabled(true);
     ui->comboBox->setEnabled(true);
     QStringList num;
@@ -314,6 +345,7 @@ void SkullGame::on_pushButton_15_clicked()
                 socket->waitForBytesWritten(6000);
 
             }
+        }
        // QString temp="Hello server";
         //QDataStream socketstream(socket);
         //socketstream.setVersion(QDataStream::Qt_5_15);
@@ -323,12 +355,29 @@ void SkullGame::on_pushButton_15_clicked()
         //
 }
     }
+    else{
+    QString tmp="erase";
+    if(socket){
 
-}
+        if(socket->isOpen()){
+            QDataStream socketstream(socket);
+            socketstream.setVersion(QDataStream::Qt_5_15);
+            QByteArray byteArray = tmp.toUtf8();
+            socketstream<<byteArray;
+            socket->waitForBytesWritten(6000);
+
+        }
+    }
+    ui->RivalCard->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156,0,0);");
+    ui->myCard->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156,0,0);");
+    }
+    }
 
 
 void SkullGame::on_pushButton_clicked()
 {
+    ui->comboBox->setDisabled(true);
+    ui->pushButton->setDisabled(true);
     if(Confirm2){
         btnlist[0]=ui->btn1;
         btnlist[1]=ui->btn2;

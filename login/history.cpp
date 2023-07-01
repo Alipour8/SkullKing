@@ -14,7 +14,17 @@ history::history(user me,QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Menu");
+    name=me.get_UserName();
     howAmI=me;
+}
+
+history::history(QString name,QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::history)
+{
+    ui->setupUi(this);
+    setWindowTitle("Menu");
+    this->name=name;
 }
 
 history::~history()
@@ -33,7 +43,8 @@ void history::on_show_clicked()
         //phone = ui->phoneforforgetpass->text();
         his.set_UserName(username);
         //forgetpass.set_PhoneNumber(phone);
-        if(database->showhistory(his,win,lose))
+        //if(database->showhistory(his,win,lose))
+        if(database->showhistory(name,win,lose))
         {
             QString Win = QString::number(win);
             QString Lose = QString::number(lose);

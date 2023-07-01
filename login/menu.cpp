@@ -9,6 +9,7 @@ menu::menu(user me,QWidget *parent) :
     setWindowTitle("Menu");
     howAmI=me;
     mass="Welcome "+howAmI.get_UserName();
+    name=howAmI.get_UserName();
      ui->userusernameforsettinglbl->setText(mass);
 }
 
@@ -41,7 +42,7 @@ void menu::on_setting_clicked()
 
 void menu::on_history_clicked()
 {
-    his=new class history(howAmI);
+    his=new class history(name);
     his->show();
 }
 

@@ -266,3 +266,35 @@ bool maindatabase::showhistory(user in_user,int &wins,int &loses)
     return false ;
 
 }
+
+bool maindatabase::showhistory(QString name,int &wins,int &loses)
+{
+    QFile Db("MainDatabase.json") ;
+    if(!Db.open(QIODevice::ReadOnly))
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","There is a problem in opening file!");
+        messageBox.setFixedSize(500,200);
+      return false ;
+    }
+    QJsonParseError JsonParseError ;
+    QJsonDocument JsonDoc = QJsonDocument::fromJson(Db.readAll(), &JsonParseError) ;
+    Db.close() ;
+    QJsonArray JsonArray = JsonDoc.object()["Users"].toArray() ;
+    for (int i=0; i < JsonArray.size(); i++)
+    {
+        QJsonObject TempObj =  JsonArray.at(i).toObject();
+        if( TempObj["UserName"].toString() == name)
+        {
+            wins = TempObj["Wins"].toInt();
+            loses = TempObj["Losts"].toInt();
+            return true ;
+
+        }
+    }
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error"," Not found current user");
+    messageBox.setFixedSize(500,200);
+    return false ;
+
+}
