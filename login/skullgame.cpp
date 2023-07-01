@@ -6,11 +6,17 @@
 #include<QByteArray>
 #include<QDataStream>
 #include<QPixmap>
+#include<QThread>
 #include "deckcard.h"
+
 bool Confirm2=false;
 int HandTakenServer;
+DeckCard Deck;
+int roundgame=7;
 QList<QString> HandServer;
 QList<QString>::Iterator itServer;
+QPushButton **btnlist=new QPushButton *[14];
+
 SkullGame::SkullGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::SkullGame)
@@ -42,9 +48,7 @@ SkullGame::~SkullGame()
     delete ui;
 }
 
-DeckCard Deck;
-int roundgame=2;
-QPushButton **btnlist=new QPushButton *[14];
+
 void SkullGame::connection(){
     while(server->hasPendingConnections()){
         socket=server->nextPendingConnection();
@@ -53,6 +57,7 @@ void SkullGame::connection(){
         break;
     }
 }
+
 void SkullGame::readSocket(){
     QTcpSocket* socket=reinterpret_cast<QTcpSocket*>(sender());
     QByteArray Buffer;
@@ -82,6 +87,19 @@ void SkullGame::readSocket(){
 
    // ui->textEdit_3->setText(Buffer);
 
+}
+
+void sendmassageserver(QString str,QTcpSocket*socket){
+    if(socket){
+        if(socket->isOpen()){
+            QDataStream socketstream(socket);
+            socketstream.setVersion(QDataStream::Qt_5_15);
+            QByteArray byteArray = str.toUtf8();
+            socketstream<<byteArray;
+            socket->waitForBytesWritten(6000);
+
+        }
+    }
 }
 
 void SkullGame::on_pushButton_15_clicked()
@@ -116,6 +134,8 @@ void SkullGame::on_pushButton_15_clicked()
                     Deck.card_list.erase(Deck.card_list.begin());
                     QString type=tmp.getCardName();
                     int value=tmp.getCardNumber();
+                    HandServer.push_back(type);
+
                     if(type=="PirateFlag" && value ==1)
                     btnlist[i]->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag1.jpg);\n");
                     if(type=="PirateFlag" && value ==2)
@@ -196,11 +216,11 @@ void SkullGame::on_pushButton_15_clicked()
         for(int i=0;i<2*roundgame;i++){
             Card temp=Deck.card_list.front();
             Deck.card_list.erase(Deck.card_list.begin());
-            CardInHand=CardInHand+temp.getCardName()+" ";
+            CardInHand+=temp.getCardName()+" ";
             int val=temp.getCardNumber();
-            CardInHand=CardInHand+QString::number(val)+" ";
+            CardInHand+=QString::number(val)+" ";
 
-
+}
         if(socket){
 
             if(socket->isOpen()){
@@ -222,7 +242,7 @@ void SkullGame::on_pushButton_15_clicked()
     }
 
 }
-}
+
 
 void SkullGame::on_pushButton_clicked()
 {

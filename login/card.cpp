@@ -10,8 +10,8 @@ Card:: Card(int value,QString card_name,int card_number){
     CardName=card_name;
     CardNumber=card_number;
 }
-Card::Card(int value,QString card_name){
-  Value=value;
+Card::Card(int card_number,QString card_name){
+  CardNumber=card_number;
   CardName=card_name;
 }
 int Card::getValue(){

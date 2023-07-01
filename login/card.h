@@ -15,7 +15,8 @@ public:
 //constructor
    // explicit Card(QWidget *parent = nullptr);
     Card(int value,QString card_name,int card_number);
-    Card(int value,QString card_name);
+    Card(int card_number,QString card_name);
+
 //copy constructor
     Card(const Card& );
     QString getCardName();

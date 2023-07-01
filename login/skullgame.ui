@@ -496,7 +496,7 @@ color: rgb(0, 0, 0);</string>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>start</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">

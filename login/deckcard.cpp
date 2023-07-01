@@ -2,15 +2,15 @@
 
 DeckCard::DeckCard(){
 
-    Card Queen(5,"Queen");
+    Card Queen(0,"Queen");
     for(int i=0;i<3;i++){
     card_list.push_back(Queen);
     }
-     Card King(4,"King");
+     Card King(0,"King");
     for(int i=0;i<3;i++){
         card_list.push_back(King);
     }
-    Card Pirate(3,"Pirate");
+    Card Pirate(0,"Pirate");
      for(int i=0;i<4;i++){
         card_list.push_back(Pirate);
     }
