@@ -29,7 +29,7 @@ menu::~menu()
 void menu::on_logout_clicked()
 {
     close();
-    //log=new login();
+    //log=new class login();
     //log->show();
 }
 
@@ -46,7 +46,15 @@ void menu::on_history_clicked()
     his->show();
 }
 
-void menu::on_start_game_clicked()
+void menu::on_start_game_clicked()//server game
 {
-    //wait for game and client-server
+    skuul=new class SkullGame();
+    skuul->show();
 }
+
+void menu::on_start_game_2_clicked()//client game
+{
+    client=new class PlayClient();
+    client->show();
+}
+

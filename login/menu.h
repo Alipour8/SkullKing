@@ -4,7 +4,8 @@
 #include <QWidget>
 #include"setting.h"
 #include"history.h"
-
+#include"skullgame.h"
+#include"playclient.h"
 
 namespace Ui {
 class menu;
@@ -28,10 +29,14 @@ private slots:
 
     void on_start_game_clicked();
 
+    void on_start_game_2_clicked();
+
 private:
     Ui::menu *ui;
     setting*set;
     history*his;
+    SkullGame*skuul;
+    PlayClient*client;
     user howAmI;
     QString name;
     QString mass;
