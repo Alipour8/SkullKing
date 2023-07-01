@@ -154,6 +154,27 @@ void PlayClient::readsocket(){
         ConfirmClient=true;
         return;
     }
+    if(cardData[0]=="NotConfirm"){
+        btnlist1[0]=ui->btn1;
+        btnlist1[1]=ui->btn2;
+        btnlist1[2]=ui->btn3;
+        btnlist1[3]=ui->btn4;
+        btnlist1[4]=ui->btn5;
+        btnlist1[5]=ui->btn6;
+        btnlist1[6]=ui->btn7;
+        btnlist1[7]=ui->btn8;
+        btnlist1[8]=ui->btn9;
+        btnlist1[9]=ui->btn10;
+        btnlist1[10]=ui->btn11;
+        btnlist1[11]=ui->btn12;
+        btnlist1[12]=ui->btn13;
+        btnlist1[13]=ui->btn14;
+        ui->comboBox->setDisabled(true);
+        ui->pushButton->setDisabled(true);
+        for(int i=0;i<14;i++)
+            btnlist1[i]->setEnabled(true);
+        return;
+    }
     ui->label_6->setText(buffer);
 }
 void PlayClient::on_pushButton_18_clicked()
