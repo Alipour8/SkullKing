@@ -22,6 +22,7 @@ SkullGame::SkullGame(QWidget *parent)
     , ui(new Ui::SkullGame)
 {
     ui->setupUi(this);
+    setWindowTitle("Server");
     QString localhostname=QHostInfo::localHostName();
     QString localhostIP;
     QList<QHostAddress>hostlist=QHostInfo::fromName(localhostname).addresses();

@@ -523,6 +523,9 @@ border-radius:10px;</string>
    <property name="text">
     <string>  My Card</string>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -559,6 +562,9 @@ border-radius:10px;</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>640</x>
@@ -581,6 +587,9 @@ border-radius:10px;</string>
    </property>
    <property name="text">
     <string>  My Rival Card</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_17">

@@ -17,6 +17,7 @@ PlayClient::PlayClient(QWidget *parent):
     ui(new Ui::PlayClient)
 {
     ui->setupUi(this);
+    setWindowTitle("Client");
     socket=new QTcpSocket(this);
     connect(socket,&QTcpSocket::readyRead,this,&PlayClient::readsocket);
 }
