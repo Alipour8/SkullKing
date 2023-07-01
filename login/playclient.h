@@ -17,7 +17,7 @@ class PlayClient : public QMainWindow
 public:
     explicit PlayClient(QWidget *parent = nullptr);
     ~PlayClient();
-
+QTcpSocket*socket;
 private slots:
     void readsocket();
     void on_pushButton_15_clicked();
@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::PlayClient *ui;
-    QTcpSocket*socket;
+
 };
 
 #endif // PLAYCLIENT_H

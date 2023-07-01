@@ -59,7 +59,7 @@ void SkullGame::readSocket(){
 
 }
 DeckCard Deck;
-int roundgame=7;
+int roundgame=2;
 QPushButton **btnlist=new QPushButton *[14];
 void SkullGame::on_pushButton_15_clicked()
 {

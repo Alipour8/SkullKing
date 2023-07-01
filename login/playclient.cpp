@@ -4,7 +4,11 @@
 #include <QPushButton>
 #include "deckcard.h"
 QPushButton **btnlist1=new QPushButton *[14];
-
+bool ConfirmClient=false;
+int HandTakenClient;
+QString Starter;
+QList<QString> HandClient;
+QList<QString>::Iterator itClient;
 PlayClient::PlayClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PlayClient)
@@ -18,6 +22,7 @@ PlayClient::~PlayClient()
 {
     delete ui;
 }
+
 
 void play(){}
 
@@ -35,7 +40,7 @@ ui->label_4->hide();
 ui->label_6->hide();
 
 }
-int roundgame2=7;
+int roundgame2=2;
 void shareHand(QPushButton **btnlist,QComboBox *cmb,QStringList cardData){
     QStringList list;
     for(int i=0;i<=2*roundgame2;i++)
@@ -144,6 +149,10 @@ void PlayClient::readsocket(){
        ui->comboBox->setEnabled(true);
        ui->pushButton->setEnabled(true);
                return;
+    }
+    if(cardData[0]=="Confirm"){
+        ConfirmClient=true;
+        return;
     }
     ui->label_6->setText(buffer);
 }
