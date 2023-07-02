@@ -43,7 +43,6 @@ public :
 
 
 private slots:
-    void on_rule_clicked();
 
     void on_forgetpassbtn_clicked();
 
@@ -53,10 +52,12 @@ private slots:
 
     void on_loginButton_clicked();
 
+    void on_rules_clicked();
+
 private:
     Ui::login *ui;
     //singup *Sing;
-    rules*rules;
+    //rules*rules;
     user inneruser;
     maindatabase *database;
     QString username;

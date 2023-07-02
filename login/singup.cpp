@@ -187,6 +187,6 @@ void singup::on_showpassforsignup_stateChanged(int arg1)
 void singup::on_backButton_clicked()
 {
     close();
-    //login*log=new login();
-    //log->show();
+    login*log=new login();
+    log->show();
 }

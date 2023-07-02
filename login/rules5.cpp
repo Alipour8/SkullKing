@@ -16,5 +16,7 @@ rules5::~rules5()
 
 void rules5::on_pushButton_clicked()
 {
-    this->hide();
+    close();
+    login*log=new login();
+   log->show();
 }

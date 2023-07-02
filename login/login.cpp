@@ -27,12 +27,12 @@ login::login(QWidget *parent)
        //setFixedSize(1402, 2472);
 
        //singup=new class singup;
-       rules=new class rules;
+       //rules=new class rules;
        connect(ui->exit,SIGNAL(clicked()),this,SLOT(close()));
        //connect(ui->rules,SIGNAL(clicked()),this,SLOT(close()));
 
        //connect(ui->pushButton_3,SIGNAL(clicked()),singup,SLOT(show()));
-       connect(ui->rules,SIGNAL(clicked()),rules,SLOT(show()));
+       //connect(ui->rules,SIGNAL(clicked()),rules,SLOT(show()));
        //maindatabase*data=new maindatabase();
        database = new maindatabase();
 }
@@ -44,9 +44,11 @@ login::~login()
 
 
 
-void login::on_rule_clicked()
+void login::on_rules_clicked()
 {
-  rules->show();
+   close();
+   rules*rul=new rules();
+  rul->show();
 
 }
 
@@ -59,7 +61,7 @@ void login::on_forgetpassbtn_clicked()
 
 void login::on_regButton_clicked()
 {
-    //close();
+    close();
     singup*sign=new singup();
     sign->show();
 }
@@ -102,4 +104,3 @@ void login::on_loginButton_clicked()
             return true;
         return false;
     }
-

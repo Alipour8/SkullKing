@@ -2,6 +2,7 @@
 #define RULES5_H
 
 #include <QWidget>
+#include"login.h"
 
 namespace Ui {
 class rules5;
