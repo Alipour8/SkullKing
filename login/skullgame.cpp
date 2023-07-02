@@ -213,7 +213,7 @@ void sendmassageserver(QString str,QTcpSocket*socket){
 
 void SkullGame::on_pushButton_15_clicked()
 {
-    if(j+1==2*roundgame){
+    if((j+1)==2*roundgame){
         if(counter)
             roundgame++;
     counter++;
@@ -368,8 +368,8 @@ void SkullGame::on_pushButton_15_clicked()
 
         }
     }
-    ui->RivalCard->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156,0,0);");
-    ui->myCard->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156,0,0);");
+    ui->RivalCard->setStyleSheet("border-radius:10px;\nborder-image: url(:/new/prefix1/CardFrame.jpg);");
+    ui->myCard->setStyleSheet("border-radius:10px;\nborder-image: url(:/new/prefix1/CardFrame.jpg);");
     }
     }
 
@@ -393,8 +393,6 @@ void SkullGame::on_pushButton_clicked()
         btnlist[11]=ui->btn12;
         btnlist[12]=ui->btn13;
         btnlist[13]=ui->btn14;
-        ui->comboBox->setDisabled(true);
-        ui->pushButton->setDisabled(true);
         for(int i=0;i<14;i++)
             btnlist[i]->setEnabled(true);
         QString tmp="NotConfirm";

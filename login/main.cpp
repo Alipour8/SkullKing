@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     SkullGame x;
     PlayClient y;
     w.show();
-    //x.show();
-    //y.show();
+    x.show();
+    y.show();
     //singup s;
     //s.show();
     return a.exec();

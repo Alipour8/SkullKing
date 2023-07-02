@@ -26,6 +26,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_btn1_clicked();
+
 private:
     Ui::PlayClient *ui;
 

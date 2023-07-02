@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1401</width>
-    <height>1095</height>
+    <width>1422</width>
+    <height>1131</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1422</width>
+    <height>1131</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1422</width>
+    <height>1131</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -16,11 +28,23 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>-20</x>
-     <y>10</y>
-     <width>1431</width>
-     <height>1091</height>
+     <x>0</x>
+     <y>-40</y>
+     <width>1422</width>
+     <height>1131</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1422</width>
+     <height>1131</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1422</width>
+     <height>1131</height>
+    </size>
    </property>
    <property name="mouseTracking">
     <bool>true</bool>
@@ -333,9 +357,9 @@ border-width: 1px;
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>700</y>
-     <width>561</width>
+     <x>1060</x>
+     <y>590</y>
+     <width>331</width>
      <height>51</height>
     </rect>
    </property>
@@ -370,9 +394,9 @@ border-width: 1px;
   <widget class="QPushButton" name="completeRegButton">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>700</y>
-     <width>561</width>
+     <x>580</x>
+     <y>590</y>
+     <width>331</width>
      <height>51</height>
     </rect>
    </property>

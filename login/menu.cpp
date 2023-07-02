@@ -48,13 +48,13 @@ void menu::on_history_clicked()
 
 void menu::on_start_game_clicked()//server game
 {
-    skuul=new class SkullGame();
-    skuul->show();
+   // skuul=new class SkullGame();
+   // skuul->show();
 }
 
 void menu::on_start_game_2_clicked()//client game
 {
-    client=new class PlayClient();
-    client->show();
+   // client=new class PlayClient();
+   // client->show();
 }
 
