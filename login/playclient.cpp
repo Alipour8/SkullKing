@@ -473,6 +473,51 @@ void PlayClient::on_btn1_clicked()
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/Queen.jpg);\n");
         if(*itClient=="Pirate")
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");
+         QStringList temp=QString(*itClient).split(" ");
+        int x= temp[1].toInt();
+        QString y= temp[0];
+        Card tmp(x,y);
+        tmp.setOwnerCard("client");
+        groundgame.Ground.push_back(tmp);
+       pair<QString,int> winner=groundgame.GroundWinner();
+       QString order=winner.first+"win"+" "+QString::number(winner.second);
+       if(socket){
+           if(socket->isOpen()){
+               QDataStream socketstream(socket);
+               socketstream.setVersion(QDataStream::Qt_5_15);
+               QByteArray byteArray = order.toUtf8();
+               socketstream<<byteArray;
+               socket->waitForBytesWritten(6000);
+
+           }
+       }
+       if(winner.first=="client"){
+           scoreClient+=winner.second;
+           HandTakenClient++;
+           btnlist1[0]=ui->btn1;
+           btnlist1[1]=ui->btn2;
+           btnlist1[2]=ui->btn3;
+           btnlist1[3]=ui->btn4;
+           btnlist1[4]=ui->btn5;
+           btnlist1[5]=ui->btn6;
+           btnlist1[6]=ui->btn7;
+           btnlist1[7]=ui->btn8;
+           btnlist1[8]=ui->btn9;
+           btnlist1[9]=ui->btn10;
+           btnlist1[10]=ui->btn11;
+           btnlist1[11]=ui->btn12;
+           btnlist1[12]=ui->btn13;
+           btnlist1[13]=ui->btn14;
+           for(int i=0;i<14;i++)
+               btnlist1[i]->setEnabled(true);
+       }
+
+       list<Card>::iterator itground;
+       for(;!groundgame.Ground.empty();){
+           itground=groundgame.Ground.begin();
+           groundgame.Ground.erase(itground);
+       }
     }
 }
+
 
