@@ -1,39 +1,20 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <QWidget>
-#include <QString>
+#include <QObject>
 
-
-class Card
-{int Value;
-    QString CardName;
-    int CardNumber;
-    QString OwnerCard;
-
-public:
-//constructor
-   // explicit Card(QWidget *parent = nullptr);
-    Card(int value,QString card_name,int card_number);
-    Card(int card_number,QString card_name);
-
-//copy constructor
-    Card(const Card& );
-
-
-
-
-//setter & getter function
-    void setOwnerCard(QString owner_card);
-    QString getOwnerCard();
-     int getValue();
-     int getCardNumber();
-    QString getCardName();
-     void setOwnerCard(int a);
-    ~Card();
-
+class Card {
+private:
+    int value;
+    QString type;
+    QString owner;
 public:
     Card();
+    Card(const Card& c1);
+    Card(int val, QString ty);
+    int get_value();
+    void setOwner(QString tmp);
+    QString getOwner();
+    QString get_type();
 };
-
 #endif // CARD_H

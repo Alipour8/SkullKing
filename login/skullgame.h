@@ -15,21 +15,45 @@ class SkullGame : public QMainWindow
     Q_OBJECT
 
 public:
-    SkullGame(QWidget *parent = nullptr);
+   explicit  SkullGame(QWidget *parent = nullptr);
     ~SkullGame();
 public slots:
     void connection();
-    void readSocket();
+        void readSocket();
 
 private slots:
-    void on_pushButton_15_clicked();
-
-
     void on_pushButton_clicked();
 
-    void on_btn1_clicked();
+       void on_pushButton_2_clicked();
 
-    void on_btn2_clicked();
+       void on_btn1_clicked();
+
+       void on_btn2_clicked();
+
+       void on_btn5_clicked();
+
+       void on_btn3_clicked();
+
+       void on_btn4_clicked();
+
+       void on_btn6_clicked();
+
+       void on_btn7_clicked();
+
+       void on_btn8_clicked();
+
+       void on_btn9_clicked();
+
+       void on_btn10_clicked();
+
+       void on_btn11_clicked();
+
+       void on_btn12_clicked();
+
+       void on_btn13_clicked();
+
+       void on_btn14_clicked();
+
 
 private:
     Ui::SkullGame *ui;

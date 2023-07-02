@@ -1,42 +1,19 @@
 #include "card.h"
+using namespace std;
+Card::Card() {
+    this->value = 0;
+    this->type = "";
+}
+Card::Card(const Card& c1) {
+    this->value = c1.value;
+    this->type = c1.type;
+    this->owner = c1.owner;
+}
+Card::Card(int val, QString ty) {
+    this->value = val; this->type = ty;
+}
+QString Card::get_type() { return type; }
+int Card::get_value() { return value; }
 
-Card::Card(){
-    Value=0;
-    CardName=" ";
-    CardNumber=0;
-}
-Card:: Card(int value,QString card_name,int card_number){
-    Value=value;
-    CardName=card_name;
-    CardNumber=card_number;
-}
-Card::Card(int card_number,QString card_name){
-  CardNumber=card_number;
-  CardName=card_name;
-}
-int Card::getValue(){
-    return Value;
-}
-Card:: Card(const Card& c){
-    Value=c.Value;
-    CardName=c.CardName;
-    CardNumber=c.CardNumber;
-}
-QString Card:: getCardName(){
-    return CardName;
-}
-
-int Card::getCardNumber(){
-    return CardNumber;
-}
-void Card:: setOwnerCard(QString owner_card){
-   OwnerCard=owner_card;
-}
-QString Card:: getOwnerCard(){
-    return OwnerCard;
-}
-Card::~Card()
-{
-
-}
-
+void Card::setOwner(QString tmp) { owner = tmp; }
+QString Card::getOwner() { return owner; }

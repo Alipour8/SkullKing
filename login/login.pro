@@ -19,9 +19,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     card.cpp \
     connecttoserver.cpp \
-    deckcard.cpp \
+    deck.cpp \
     forgetpassword.cpp \
-    groundgame.cpp \
+    ground.cpp \
     history.cpp \
     main.cpp \
     login.cpp \
@@ -41,9 +41,9 @@ SOURCES += \
 HEADERS += \
     card.h \
     connecttoserver.h \
-    deckcard.h \
+    deck.h \
     forgetpassword.h \
-    groundgame.h \
+    ground.h \
     history.h \
     login.h \
     maindatabase.h \
