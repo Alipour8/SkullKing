@@ -1,5 +1,6 @@
 #include "history.h"
 #include "ui_history.h"
+#include"menu.h"
 
 history::history(QWidget *parent) :
     QWidget(parent),
@@ -64,5 +65,8 @@ void history::on_show_clicked()
 
 void history::on_backbtn_clicked()
 {
-    hide();
+    //hide();
+    close();
+    menu*log=new menu();
+    log->show();
 }

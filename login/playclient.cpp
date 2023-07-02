@@ -4,14 +4,21 @@
 #include "deck.h"
 #include <QPushButton>
 #include "ground.h"
+
 QPushButton **btnlistclient = new QPushButton*[14];
 QLabel **lbllistclient = new QLabel*[14];
+
 bool lockclient = false, serverplayed = false;
+
 int handCanTakeclient, scoreclient = 0, handTakenclient = 0;
+
 Ground groundclient;
+
 QString whoStarts;
+
 QList<QString> Handclient;
 QList<QString>::Iterator itHandclient;
+
 PlayClient::PlayClient(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PlayClient)
@@ -21,6 +28,18 @@ PlayClient::PlayClient(QWidget *parent) :
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::readyRead, this, &PlayClient::readsocket);
 
+}
+
+PlayClient::PlayClient(user me,QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::PlayClient)
+{
+    ui->setupUi(this);
+    howAmI=me;
+    QString name;
+    setWindowTitle("Client");
+    socket = new QTcpSocket(this);
+    connect(socket, &QTcpSocket::readyRead, this, &PlayClient::readsocket);
 }
 
 PlayClient::~PlayClient()
@@ -42,9 +61,9 @@ void PlayClient::on_pushButton_clicked()
 {
     socket->connectToHost(ui->lineEdit->text(), 1234);
     if(socket->waitForConnected())
-         ui->label_2->setText("connected");
+         ui->label_2->setText(" Connected");
     else
-        ui->label_2->setText("error");
+        ui->label_2->setText(" Error");
     ui->pushButton->hide();
     ui->lineEdit->hide();
 }
@@ -202,6 +221,11 @@ void PlayClient::readsocket(){
     if(command[0] == "clientwin"){
         handTakenclient++;
         scoreclient += command[1].toInt();
+        //call maindatabase for editing user score in json file
+        maindatabase::score(howAmI,scoreclient);
+        //call maindatabase for adding user win in json file
+        maindatabase::addwin(howAmI);
+
         ui->lblhandtaken->setText(QString::number(handTakenclient));
         ui->lblscore->setText(QString::number(scoreclient));
         btnlistclient[0] = ui->btn1; btnlistclient[1] = ui->btn2;
@@ -215,6 +239,9 @@ void PlayClient::readsocket(){
             btnlistclient[i]->setEnabled(true);
     }
     if(command[0] == "serverwin"){
+        //call maindatabase for adding user lost in json file
+        maindatabase::addlost(howAmI);
+
         ui->lblhandtaken->setText(QString::number(handTakenclient));
         ui->lblscore->setText(QString::number(scoreclient));
         ui->pushButton->setEnabled(true);

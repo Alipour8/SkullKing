@@ -204,6 +204,128 @@ void maindatabase::Modify_UserDetails( user in_user )
     Db.close() ;
 }
 
+void maindatabase::score( user in_user ,int score)
+{
+    QFile Db("MainDatabase.json") ;
+    if( !Db.open(QIODevice::ReadOnly))
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","There is a problem in opening file!");
+        messageBox.setFixedSize(500,200);
+       return  ;
+    }
+    QJsonParseError JsonParseError ;
+    QJsonDocument JsonDoc = QJsonDocument::fromJson(Db.readAll(), &JsonParseError) ;
+    Db.close() ;
+    QJsonObject jobj = JsonDoc.object() ;
+    QJsonArray UsersArray = jobj["Users"].toArray() ;
+    for (int i=0; i < UsersArray.size(); i++)
+    {
+        QJsonObject TempObj =  UsersArray.at(i).toObject();
+
+        if( in_user.get_UserName() == TempObj["UserName"].toString() )
+        {
+            QJsonObject Newuser ;
+            Newuser = UsersArray.at(i).toObject();
+            Newuser["scores"] = score;
+            //Newuser["Password"] = in_user.get_Password();
+            //Newuser["PhoneNumber"] = in_user.get_PhoneNumber();
+            //Newuser["Firstname"] = in_user.get_firstname();
+            //Newuser["UserName"] = in_user.get_UserName();
+            UsersArray.removeAt(i);
+            UsersArray.insert(i , Newuser );
+        }
+    }
+    jobj.insert( "Users" , UsersArray ) ;
+    JsonDoc.setObject(jobj) ;
+    Db.open(QFile::WriteOnly | QFile::Text | QFile::Truncate);
+    Db.write( JsonDoc.toJson() ) ;
+    Db.close() ;
+}
+
+
+void maindatabase::addwin( user in_user)
+{
+    QFile Db("MainDatabase.json") ;
+    if( !Db.open(QIODevice::ReadOnly))
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","There is a problem in opening file!");
+        messageBox.setFixedSize(500,200);
+       return  ;
+    }
+    QJsonParseError JsonParseError ;
+    QJsonDocument JsonDoc = QJsonDocument::fromJson(Db.readAll(), &JsonParseError) ;
+    Db.close() ;
+    QJsonObject jobj = JsonDoc.object() ;
+    QJsonArray UsersArray = jobj["Users"].toArray() ;
+    for (int i=0; i < UsersArray.size(); i++)
+    {
+        QJsonObject TempObj =  UsersArray.at(i).toObject();
+
+        if( in_user.get_UserName() == TempObj["UserName"].toString() )
+        {
+            int a=TempObj["Wins"].toInt();
+            a++;
+            QJsonObject Newuser ;
+            Newuser = UsersArray.at(i).toObject();
+            Newuser["Wins"]=a;
+            //Newuser["Password"] = in_user.get_Password();
+            //Newuser["PhoneNumber"] = in_user.get_PhoneNumber();
+            //Newuser["Firstname"] = in_user.get_firstname();
+            //Newuser["UserName"] = in_user.get_UserName();
+            UsersArray.removeAt(i);
+            UsersArray.insert(i , Newuser );
+        }
+    }
+    jobj.insert( "Users" , UsersArray ) ;
+    JsonDoc.setObject(jobj) ;
+    Db.open(QFile::WriteOnly | QFile::Text | QFile::Truncate);
+    Db.write( JsonDoc.toJson() ) ;
+    Db.close() ;
+}
+
+void maindatabase::addlost( user in_user)
+{
+    QFile Db("MainDatabase.json") ;
+    if( !Db.open(QIODevice::ReadOnly))
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","There is a problem in opening file!");
+        messageBox.setFixedSize(500,200);
+       return  ;
+    }
+    QJsonParseError JsonParseError ;
+    QJsonDocument JsonDoc = QJsonDocument::fromJson(Db.readAll(), &JsonParseError) ;
+    Db.close() ;
+    QJsonObject jobj = JsonDoc.object() ;
+    QJsonArray UsersArray = jobj["Users"].toArray() ;
+    for (int i=0; i < UsersArray.size(); i++)
+    {
+        QJsonObject TempObj =  UsersArray.at(i).toObject();
+
+        if( in_user.get_UserName() == TempObj["UserName"].toString() )
+        {
+            int a=TempObj["Losts"].toInt();
+            a++;
+            QJsonObject Newuser ;
+            Newuser = UsersArray.at(i).toObject();
+            Newuser["Losts"]=a;
+            //Newuser["Password"] = in_user.get_Password();
+            //Newuser["PhoneNumber"] = in_user.get_PhoneNumber();
+            //Newuser["Firstname"] = in_user.get_firstname();
+            //Newuser["UserName"] = in_user.get_UserName();
+            UsersArray.removeAt(i);
+            UsersArray.insert(i , Newuser );
+        }
+    }
+    jobj.insert( "Users" , UsersArray ) ;
+    JsonDoc.setObject(jobj) ;
+    Db.open(QFile::WriteOnly | QFile::Text | QFile::Truncate);
+    Db.write( JsonDoc.toJson() ) ;
+    Db.close() ;
+}
+
 
 bool maindatabase::userpasswordForforgot(user in_user, QString &pass)
 {

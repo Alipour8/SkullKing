@@ -83,7 +83,7 @@ void login::on_loginButton_clicked()
         {
             this->username = ui->usernameBox->text();
             this->password = ui->passwordBox->text();
-            //login::hide();
+            login::close();
 
             //we should add menu here
             Menu=new menu(inneruser);

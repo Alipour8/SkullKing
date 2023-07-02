@@ -5,6 +5,8 @@
 #include<QMainWindow>
 #include<QHostAddress>
 #include<QTcpSocket>
+#include"user.h"
+#include"maindatabase.h"
 
 namespace Ui {
 class PlayClient;
@@ -16,6 +18,7 @@ class PlayClient : public QMainWindow
 
 public:
     explicit PlayClient(QWidget *parent = nullptr);
+    PlayClient(user me,QWidget *parent = nullptr);
     ~PlayClient();
 QTcpSocket*socket;
 private slots:
@@ -55,7 +58,8 @@ void readsocket();
     void on_btn14_clicked();
 private:
     Ui::PlayClient *ui;
-
+    user howAmI;
+    QString name;
 };
 
 #endif // PLAYCLIENT_H

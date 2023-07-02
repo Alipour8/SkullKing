@@ -1,5 +1,6 @@
 #include "setting.h"
 #include "ui_setting.h"
+#include"menu.h"
 
 setting::setting(QWidget *parent) :
     QWidget(parent),
@@ -15,6 +16,7 @@ setting::setting(user me,QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Menu");
     howAmI=me;
+    name=me.get_UserName();
 }
 
 setting::setting(QString name,QWidget *parent) :
@@ -110,7 +112,9 @@ void setting::on_savebtn_clicked()
 
 void setting::on_backbtn_clicked()
 {
-    this->hide();
+    close();
+    menu*log=new menu();
+    log->show();
 
 }
 

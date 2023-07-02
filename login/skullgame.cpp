@@ -1,3 +1,4 @@
+//it is server of game
 #include "skullgame.h"
 #include "ui_skullgame.h"
 #include <QTcpServer>
@@ -10,19 +11,28 @@
 #include <QtMath>
 #include "ground.h"
 #include "deck.h"
+#include"menu.h"
+
 Deck deck;
 Ground groundserver;
+
 bool lockserver = false, clientplayed = false;
+//ctr is counter
 int roundgame = 1, handCanTakeserver, handTakenserver = 0, scoreserver = 0, j = 0, ctr = 0;
+
 QLabel **lbllistserver = new QLabel*[14];
 QPushButton **btnlistserver = new QPushButton*[14];
+
 QList<QString> Handserver;
 QList<QString>::Iterator itHandserver;
+
+
 SkullGame::SkullGame(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SkullGame)
 {
     ui->setupUi(this);
+    setWindowTitle("Server");
     QString localhostname = QHostInfo::localHostName();
     QString localhostIP;
     QList<QHostAddress> hostList = QHostInfo::fromName(localhostname).addresses();
@@ -35,10 +45,37 @@ SkullGame::SkullGame(QWidget *parent) :
     server = new QTcpServer();
     if(server->listen(QHostAddress::Any, 1234)){
         connect(server, &QTcpServer::newConnection, this, &SkullGame::connection);
-        ui->lbl3->setText("waiting...");
+        ui->lbl3->setText("  Waiting...");
     }
     else{
-        ui->lbl3->setText("error!");
+        ui->lbl3->setText("  Error!");
+    }
+}
+
+
+SkullGame::SkullGame(user me,QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::SkullGame)
+{
+    ui->setupUi(this);
+    setWindowTitle("Server");
+    howAmI=me;
+    QString localhostname = QHostInfo::localHostName();
+    QString localhostIP;
+    QList<QHostAddress> hostList = QHostInfo::fromName(localhostname).addresses();
+    foreach (const QHostAddress& address, hostList) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address.isLoopback() == false) {
+            localhostIP = address.toString();
+        }
+    }
+    ui->label_4->setText(localhostIP);
+    server = new QTcpServer();
+    if(server->listen(QHostAddress::Any, 1234)){
+        connect(server, &QTcpServer::newConnection, this, &SkullGame::connection);
+        ui->lbl3->setText("  Waiting...");
+    }
+    else{
+        ui->lbl3->setText("  Error!");
     }
 }
 
@@ -47,15 +84,18 @@ SkullGame::~SkullGame()
     delete ui;
 }
 
+
 void SkullGame::connection(){
     while(server->hasPendingConnections()){
         socket = server->nextPendingConnection();
         connect(socket, &QTcpSocket::readyRead, this, &SkullGame::readSocket);
-        ui->lbl3->setText("connected");
+        ui->lbl3->setText(" Connected");
         ui->label_4->hide();
         break;
     }
 }
+
+
 void SkullGame::readSocket(){
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
     QByteArray buffer;
@@ -65,13 +105,20 @@ void SkullGame::readSocket(){
     socketStream >> buffer;
     QStringList command = QString(buffer).split(" ");
     if(command[0] == "server"){
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setEnabled(true);
     }
@@ -99,13 +146,25 @@ void SkullGame::readSocket(){
         scoreserver += command[1].toInt();
         ui->lblhandtaken->setText(QString::number(handTakenserver));
         ui->lblscore->setText(QString::number(scoreserver));
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        //call maindatabase for editing user score in json file
+        maindatabase::score(howAmI,scoreserver);
+        //call maindatabase for adding user win in json file
+        maindatabase::addwin(howAmI);
+
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setEnabled(true);
         ui->pushButton->setEnabled(true);
@@ -114,15 +173,24 @@ void SkullGame::readSocket(){
         ui->lblhandtaken->setText(QString::number(handTakenserver));
         ui->lblscore->setText(QString::number(scoreserver));
         ui->pushButton->setEnabled(true);
+        //call maindatabase for adding user lost in json file
+        maindatabase::addlost(howAmI);
     }
     if(command[0] == "enable"){
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setEnabled(true);
     }
@@ -130,13 +198,20 @@ void SkullGame::readSocket(){
         clientplayed = true;
         Card tmp(command[2].toInt(), command[1]);
         tmp.setOwner("client");
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setEnabled(true);
         if(command[1] == "flag")
@@ -157,6 +232,8 @@ void SkullGame::readSocket(){
         groundserver.ground.push_back(tmp);
     }
 }
+
+
 void sendMessageserver(QString tmp, QTcpSocket* socket){
     if(socket){
         if(socket->isOpen()){
@@ -168,6 +245,8 @@ void sendMessageserver(QString tmp, QTcpSocket* socket){
         }
     }
 }
+
+
 void SkullGame::on_pushButton_clicked()
 {
     if(j == 2 * roundgame || (j == 0 && roundgame == 1)){
@@ -201,20 +280,34 @@ void SkullGame::on_pushButton_clicked()
         for(int i = 0; i <= 2 * roundgame; i++)
             list.push_back(QString::number(i));
         ui->cmb->addItems(list);
-        lbllistserver[0] = ui->lb1; lbllistserver[1] = ui->lb2;
-        lbllistserver[2] = ui->lb3; lbllistserver[3] = ui->lb4;
-        lbllistserver[4] = ui->lb5; lbllistserver[5] = ui->lb6;
-        lbllistserver[6] = ui->lb7; lbllistserver[7] = ui->lb8;
-        lbllistserver[8] = ui->lb9; lbllistserver[9] = ui->lb10;
-        lbllistserver[10] = ui->lb11; lbllistserver[11] = ui->lb12;
-        lbllistserver[12] = ui->lb13; lbllistserver[13] = ui->lb14;
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        lbllistserver[0] = ui->lb1;
+        lbllistserver[1] = ui->lb2;
+        lbllistserver[2] = ui->lb3;
+        lbllistserver[3] = ui->lb4;
+        lbllistserver[4] = ui->lb5;
+        lbllistserver[5] = ui->lb6;
+        lbllistserver[6] = ui->lb7;
+        lbllistserver[7] = ui->lb8;
+        lbllistserver[8] = ui->lb9;
+        lbllistserver[9] = ui->lb10;
+        lbllistserver[10] = ui->lb11;
+        lbllistserver[11] = ui->lb12;
+        lbllistserver[12] = ui->lb13;
+        lbllistserver[13] = ui->lb14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         if(socket->isOpen()){
            ui->pushButton->setDisabled(true);
            int i = 0;
@@ -261,18 +354,27 @@ void SkullGame::on_pushButton_clicked()
     ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
     ui->mycardvaluelbl->clear();
 }
+
+
 void SkullGame::on_pushButton_2_clicked()
 {
     ui->cmb->setDisabled(true);
     ui->pushButton_2->setDisabled(true);
     if(lockserver){
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setEnabled(true);
         QString tmp = "enable";
@@ -293,13 +395,20 @@ void SkullGame::on_btn1_clicked()
         itHandserver = Handserver.begin();
         QString command = "play " + *itHandserver + " " + ui->lb1->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[0]->hide();
@@ -325,13 +434,20 @@ void SkullGame::on_btn1_clicked()
         itHandserver = Handserver.begin();
         QString command = "last " + *itHandserver + " " + ui->lb1->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[0]->hide();
@@ -360,24 +476,38 @@ void SkullGame::on_btn1_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -400,13 +530,20 @@ void SkullGame::on_btn2_clicked()
         std::advance(itHandserver, 1);
         QString command = "play " + *itHandserver + " " + ui->lb2->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[1]->hide();
@@ -433,13 +570,20 @@ void SkullGame::on_btn2_clicked()
         advance(itHandserver, 1);
         QString command = "last " + *itHandserver + " " + ui->lb2->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[1]->hide();
@@ -468,24 +612,38 @@ void SkullGame::on_btn2_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -508,13 +666,20 @@ void SkullGame::on_btn5_clicked()
         std::advance(itHandserver, 4);
         QString command = "play " + *itHandserver + " " + ui->lb5->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[4]->hide();
@@ -541,13 +706,20 @@ void SkullGame::on_btn5_clicked()
         advance(itHandserver, 4);
         QString command = "last " + *itHandserver + " " + ui->lb5->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[4]->hide();
@@ -576,24 +748,38 @@ void SkullGame::on_btn5_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -616,13 +802,20 @@ void SkullGame::on_btn3_clicked()
         std::advance(itHandserver, 2);
         QString command = "play " + *itHandserver + " " + ui->lb3->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[2]->hide();
@@ -649,13 +842,20 @@ void SkullGame::on_btn3_clicked()
         advance(itHandserver, 2);
         QString command = "last " + *itHandserver + " " + ui->lb3->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[2]->hide();
@@ -684,24 +884,38 @@ void SkullGame::on_btn3_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -724,13 +938,20 @@ void SkullGame::on_btn4_clicked()
         std::advance(itHandserver, 3);
         QString command = "play " + *itHandserver + " " + ui->lb4->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[3]->hide();
@@ -757,13 +978,20 @@ void SkullGame::on_btn4_clicked()
         advance(itHandserver, 3);
         QString command = "last " + *itHandserver + " " + ui->lb4->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[3]->hide();
@@ -792,24 +1020,38 @@ void SkullGame::on_btn4_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -832,13 +1074,20 @@ void SkullGame::on_btn6_clicked()
         std::advance(itHandserver, 5);
         QString command = "play " + *itHandserver + " " + ui->lb6->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[5]->hide();
@@ -865,13 +1114,20 @@ void SkullGame::on_btn6_clicked()
         advance(itHandserver, 5);
         QString command = "last " + *itHandserver + " " + ui->lb6->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[5]->hide();
@@ -900,24 +1156,38 @@ void SkullGame::on_btn6_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -940,13 +1210,20 @@ void SkullGame::on_btn7_clicked()
         std::advance(itHandserver, 6);
         QString command = "play " + *itHandserver + " " + ui->lb7->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[6]->hide();
@@ -973,13 +1250,20 @@ void SkullGame::on_btn7_clicked()
         advance(itHandserver, 6);
         QString command = "last " + *itHandserver + " " + ui->lb7->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[6]->hide();
@@ -1008,24 +1292,38 @@ void SkullGame::on_btn7_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -1048,13 +1346,20 @@ void SkullGame::on_btn8_clicked()
         std::advance(itHandserver, 7);
         QString command = "play " + *itHandserver + " " + ui->lb8->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[7]->hide();
@@ -1081,13 +1386,20 @@ void SkullGame::on_btn8_clicked()
         advance(itHandserver, 7);
         QString command = "last " + *itHandserver + " " + ui->lb8->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[7]->hide();
@@ -1116,24 +1428,38 @@ void SkullGame::on_btn8_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -1156,13 +1482,20 @@ void SkullGame::on_btn9_clicked()
         std::advance(itHandserver, 8);
         QString command = "play " + *itHandserver + " " + ui->lb9->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[8]->hide();
@@ -1189,13 +1522,20 @@ void SkullGame::on_btn9_clicked()
         advance(itHandserver, 8);
         QString command = "last " + *itHandserver + " " + ui->lb9->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[8]->hide();
@@ -1224,24 +1564,38 @@ void SkullGame::on_btn9_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -1264,13 +1618,20 @@ void SkullGame::on_btn10_clicked()
         std::advance(itHandserver, 9);
         QString command = "play " + *itHandserver + " " + ui->lb10->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[9]->hide();
@@ -1297,13 +1658,20 @@ void SkullGame::on_btn10_clicked()
         advance(itHandserver, 9);
         QString command = "last " + *itHandserver + " " + ui->lb10->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[9]->hide();
@@ -1332,24 +1700,38 @@ void SkullGame::on_btn10_clicked()
         if(winner.first == "server"){
             scoreserver += winner.second;
             handTakenserver++;
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setEnabled(true);
         }
         else{
-            btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-            btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-            btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-            btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-            btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-            btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-            btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+            btnlistserver[0] = ui->btn1;
+            btnlistserver[1] = ui->btn2;
+            btnlistserver[2] = ui->btn3;
+            btnlistserver[3] = ui->btn4;
+            btnlistserver[4] = ui->btn5;
+            btnlistserver[5] = ui->btn6;
+            btnlistserver[6] = ui->btn7;
+            btnlistserver[7] = ui->btn8;
+            btnlistserver[8] = ui->btn9;
+            btnlistserver[9] = ui->btn10;
+            btnlistserver[10] = ui->btn11;
+            btnlistserver[11] = ui->btn12;
+            btnlistserver[12] = ui->btn13;
+            btnlistserver[13] = ui->btn14;
             for(int i = 0; i < 14; i++)
                 btnlistserver[i]->setDisabled(true);
         }
@@ -1372,13 +1754,20 @@ void SkullGame::on_btn11_clicked()
         std::advance(itHandserver, 10);
         QString command = "play " + *itHandserver + " " + ui->lb11->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[10]->hide();
@@ -1405,13 +1794,20 @@ void SkullGame::on_btn11_clicked()
         advance(itHandserver, 10);
         QString command = "last " + *itHandserver + " " + ui->lb11->text();
         sendMessageserver(command, socket);
-        btnlistserver[0] = ui->btn1; btnlistserver[1] = ui->btn2;
-        btnlistserver[2] = ui->btn3; btnlistserver[3] = ui->btn4;
-        btnlistserver[4] = ui->btn5; btnlistserver[5] = ui->btn6;
-        btnlistserver[6] = ui->btn7; btnlistserver[7] = ui->btn8;
-        btnlistserver[8] = ui->btn9; btnlistserver[9] = ui->btn10;
-        btnlistserver[10] = ui->btn11; btnlistserver[11] = ui->btn12;
-        btnlistserver[12] = ui->btn13; btnlistserver[13] = ui->btn14;
+        btnlistserver[0] = ui->btn1;
+        btnlistserver[1] = ui->btn2;
+        btnlistserver[2] = ui->btn3;
+        btnlistserver[3] = ui->btn4;
+        btnlistserver[4] = ui->btn5;
+        btnlistserver[5] = ui->btn6;
+        btnlistserver[6] = ui->btn7;
+        btnlistserver[7] = ui->btn8;
+        btnlistserver[8] = ui->btn9;
+        btnlistserver[9] = ui->btn10;
+        btnlistserver[10] = ui->btn11;
+        btnlistserver[11] = ui->btn12;
+        btnlistserver[12] = ui->btn13;
+        btnlistserver[13] = ui->btn14;
         for(int i = 0; i < 14; i++)
             btnlistserver[i]->setDisabled(true);
         btnlistserver[10]->hide();

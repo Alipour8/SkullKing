@@ -19,6 +19,9 @@ public:
     bool userpasswordForforgot(user in_user, QString &pass);
     bool showhistory(user in_user, int &wins,int &loses);
     bool showhistory(QString name, int &wins,int &loses);
+    static void score(user in_user,int score);
+    static void addwin(user in_user);
+    static void addlost(user in_user);
 };
 
 #endif // MAINDATABASE_H

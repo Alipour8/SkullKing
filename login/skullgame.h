@@ -5,6 +5,8 @@
 #include <QMainWindow>
 #include<QTcpServer>
 #include<QTcpSocket>
+#include"user.h"
+#include"maindatabase.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class SkullGame; }
@@ -15,7 +17,8 @@ class SkullGame : public QMainWindow
     Q_OBJECT
 
 public:
-   explicit  SkullGame(QWidget *parent = nullptr);
+   explicit SkullGame(QWidget *parent = nullptr);
+    SkullGame(user me,QWidget *parent = nullptr);
     ~SkullGame();
 public slots:
     void connection();
@@ -59,5 +62,7 @@ private:
     Ui::SkullGame *ui;
     QTcpServer *server;
     QTcpSocket *socket;
+    user howAmI;
+    QString name;
 };
 #endif // SKULLGAME_H

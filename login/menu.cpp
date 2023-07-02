@@ -1,5 +1,10 @@
 #include "menu.h"
 #include "ui_menu.h"
+#include"login.h"
+#include"setting.h"
+#include"history.h"
+#include"skullgame.h"
+#include"playclient.h"
 
 menu::menu(user me,QWidget *parent) :
     QWidget(parent),
@@ -29,32 +34,41 @@ menu::~menu()
 void menu::on_logout_clicked()
 {
     close();
-    //log=new class login();
-    //log->show();
+    login*log=new login();
+    log->show();
 }
 
 void menu::on_setting_clicked()
 {
-    set=new class setting(howAmI);
-    set->show();
+    close();
+    setting*log=new setting(howAmI);
+    log->show();
+    //set=new class setting(howAmI);
+    //set->show();
     //hide();
 }
 
 void menu::on_history_clicked()
 {
-    his=new class history(name);
-    his->show();
+    close();
+    history*log=new history(name);
+    //history*log=new history(howAmI);
+    log->show();
+    //his=new class history(name);
+    //his->show();
 }
 
 void menu::on_start_game_clicked()//server game
 {
-   // skuul=new class SkullGame();
-   // skuul->show();
+    close();
+   SkullGame*skull=new SkullGame(howAmI);
+   skull->show();
 }
 
 void menu::on_start_game_2_clicked()//client game
 {
-   // client=new class PlayClient();
-   // client->show();
+    close();
+   PlayClient*client=new PlayClient(howAmI);
+   client->show();
 }
 
