@@ -208,7 +208,7 @@ void PlayClient::readsocket(){
         for(int i=0;i<14;i++)
             btnlist1[i]->setEnabled(true);
  int value=cardData[2].toInt();
-        if(cardData[1]=="PirateFlag" && cardData[2]==QString::number(1))
+       /* if(cardData[1]=="PirateFlag" && cardData[2]==QString::number(1))
         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag1.jpg);\n");
         if(cardData[1]=="PirateFlag" && cardData[2]==QString::number(2) )
         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag2.jpg);\n");
@@ -277,7 +277,77 @@ void PlayClient::readsocket(){
         if(cardData[1]=="Queen" && cardData[2]==QString::number(0))
        ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Queen.jpg);\n");
         if(cardData[1]=="Pirate" && cardData[2]==QString::number(0))
-       ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");
+       ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");*/
+ if(cardData[1]=="PirateFlag 1")
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag1.jpg);\n");
+         if(cardData[1]=="PirateFlag 2"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag2.jpg);\n");
+         if(cardData[1]=="PirateFlag 3" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag3.jpg);\n");
+         if(cardData[1]=="PirateFlag 4" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag4.jpg);\n");
+         if(cardData[1]=="PirateFlag 5" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag5.jpg);\n");
+         if(cardData[1]=="PirateFlag 6"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag6.jpg);\n");
+         if(cardData[1]=="PirateFlag 7" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag7.jpg);\n");
+         if(cardData[1]=="PirateFlag 8" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/PirateFlag8.jpg);\n");
+         if(cardData[1]=="Parrot 1"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot1.jpg);\n");
+         if(cardData[1]=="Parrot 2"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot2.jpg);\n");
+         if(cardData[1]=="Parrot 3"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot3.jpg);\n");
+         if(cardData[1]=="Parrot 4"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot4.jpg);\n");
+         if(cardData[1]=="Parrot 5" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot5.jpg);\n");
+         if(cardData[1]=="Parrot 6" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot6.jpg);\n");
+         if(cardData[1]=="Parrot 7"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot7.jpg);\n");
+         if(cardData[1]=="Parrot 8"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Parrot8.jpg);\n");
+         if(cardData[1]=="Map 1" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map1.jpg);\n");
+         if(cardData[1]=="Map 2"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map2.jpg);\n");
+         if(cardData[1]=="Map 3"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map3.jpg);\n");
+         if(cardData[1]=="Map 4" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map4.jpg);\n");
+         if(cardData[1]=="Map 5" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map5.jpg);\n");
+         if(cardData[1]=="Map 6" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map6.jpg);\n");
+         if(cardData[1]=="Map 7" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map7.jpg);\n");
+         if(cardData[1]=="Map 8"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Map8.jpg);\n");
+         if(cardData[1]=="Treasure 1"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure1.jpg);\n");
+         if(cardData[1]=="Treasure 2" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure2.jpg);\n");
+         if(cardData[1]=="Treasure 3"  )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure3.jpg);\n");
+         if(cardData[1]=="Treasure 4"  )
+        ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure4.jpg);\n");
+         if(cardData[1]=="Treasure 5" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure5.jpg);\n");
+         if(cardData[1]=="Treasure 6" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure6.jpg);\n");
+         if(cardData[1]=="Treasure 7" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure7.jpg);\n");
+         if(cardData[1]=="Treasure 8" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Treasure8.jpg);\n");
+         if(cardData[1]=="King 0" )
+         ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/King.jpg);\n");
+         if(cardData[1]=="Queen 0" )
+        ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/Queen.jpg);\n");
+         if(cardData[1]=="Pirate 0" )
+        ui->RivalClient->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");
     serverplayed=true;
     groundgame.Ground.push_back(temp);
         return;
@@ -467,11 +537,11 @@ void PlayClient::on_btn1_clicked()
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure7.jpg);\n");
         if(*itClient=="Treasure 8")
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/Treasure8.jpg);\n");
-        if(*itClient=="King")
+        if(*itClient=="King 0")
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/King.jpg);\n");
-        if(*itClient=="Queen")
+        if(*itClient=="Queen 0")
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/Queen.jpg);\n");
-        if(*itClient=="Pirate")
+        if(*itClient=="Pirate 0")
         ui->MyCard->setStyleSheet("border-image:url(:/new/prefix1/TheGiant.jpg);\n");
          QStringList temp=QString(*itClient).split(" ");
         int x= temp[1].toInt();
