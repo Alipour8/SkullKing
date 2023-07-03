@@ -60,6 +60,7 @@ void menu::on_history_clicked()
 
 void menu::on_start_game_clicked()//server game
 {
+    maindatabase::deletecoin(howAmI);//dicrease 50 coins
     close();
    SkullGame*skull=new SkullGame(howAmI);
    skull->show();
@@ -67,6 +68,7 @@ void menu::on_start_game_clicked()//server game
 
 void menu::on_start_game_2_clicked()//client game
 {
+     maindatabase::deletecoin(howAmI);//dicrease 50 coins
     close();
    PlayClient*client=new PlayClient(howAmI);
    client->show();

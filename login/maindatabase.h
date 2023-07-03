@@ -22,6 +22,8 @@ public:
     static void score(user in_user,int score);
     static void addwin(user in_user);
     static void addlost(user in_user);
+    static void addcoin(user in_user);
+    static void deletecoin(user in_user);
 };
 
 #endif // MAINDATABASE_H

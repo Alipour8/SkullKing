@@ -57,6 +57,10 @@ private slots:
 
        void on_btn14_clicked();
 
+       void on_pushButton_3_clicked();
+
+       void on_pushButton_17_clicked();
+
 
 private:
     Ui::SkullGame *ui;
@@ -64,5 +68,6 @@ private:
     QTcpSocket *socket;
     user howAmI;
     QString name;
+    QTimer*mytimer;
 };
 #endif // SKULLGAME_H

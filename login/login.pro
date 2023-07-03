@@ -26,6 +26,8 @@ SOURCES += \
     main.cpp \
     login.cpp \
     maindatabase.cpp \
+    massagelose.cpp \
+    massagewin.cpp \
     menu.cpp \
     playclient.cpp \
     rules.cpp \
@@ -36,6 +38,7 @@ SOURCES += \
     setting.cpp \
     singup.cpp \
     skullgame.cpp \
+    timer.cpp \
     user.cpp
 
 HEADERS += \
@@ -47,6 +50,8 @@ HEADERS += \
     history.h \
     login.h \
     maindatabase.h \
+    massagelose.h \
+    massagewin.h \
     menu.h \
     playclient.h \
     rules.h \
@@ -57,12 +62,15 @@ HEADERS += \
     setting.h \
     singup.h \
     skullgame.h \
+    timer.h \
     user.h
 
 FORMS += \
     forgetpassword.ui \
     history.ui \
     login.ui \
+    massagelose.ui \
+    massagewin.ui \
     menu.ui \
     playclient.ui \
     rules.ui \
@@ -72,7 +80,8 @@ FORMS += \
     rules5.ui \
     setting.ui \
     singup.ui \
-    skullgame.ui
+    skullgame.ui \
+    timer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

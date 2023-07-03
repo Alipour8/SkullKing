@@ -56,10 +56,16 @@ void readsocket();
     void on_btn13_clicked();
 
     void on_btn14_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_17_clicked();
+
 private:
     Ui::PlayClient *ui;
     user howAmI;
     QString name;
+    QTimer*mytimer;
 };
 
 #endif // PLAYCLIENT_H
