@@ -46,7 +46,7 @@ SkullGame::SkullGame(QWidget *parent) :
     }
     ui->label_4->setText(localhostIP);
     server = new QTcpServer();
-    if(server->listen(QHostAddress::Any, 1234)){
+    if(server->listen(QHostAddress::Any, 1024)){
         connect(server, &QTcpServer::newConnection, this, &SkullGame::connection);
         ui->lbl3->setText("Waiting...");
     }
@@ -73,7 +73,35 @@ SkullGame::SkullGame(user me,QWidget *parent) :
     }
     ui->label_4->setText(localhostIP);
     server = new QTcpServer();
-    if(server->listen(QHostAddress::Any, 1234)){
+    quint16 port=8080;
+    if(server->listen(QHostAddress::Any, port)){
+        connect(server, &QTcpServer::newConnection, this, &SkullGame::connection);
+        ui->lbl3->setText("Waiting...");
+    }
+    else{
+        ui->lbl3->setText("Error");
+    }
+}
+
+SkullGame::SkullGame(QString name,QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::SkullGame)
+{
+    ui->setupUi(this);
+    setWindowTitle("Server");
+    //howAmI=me;
+    this->name=name;
+    QString localhostname = QHostInfo::localHostName();
+    QString localhostIP;
+    QList<QHostAddress> hostList = QHostInfo::fromName(localhostname).addresses();
+    foreach (const QHostAddress& address, hostList) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address.isLoopback() == false) {
+            localhostIP = address.toString();
+        }
+    }
+    ui->label_4->setText(localhostIP);
+    server = new QTcpServer();
+    if(server->listen(QHostAddress::Any, 1024)){
         connect(server, &QTcpServer::newConnection, this, &SkullGame::connection);
         ui->lbl3->setText("Waiting...");
     }

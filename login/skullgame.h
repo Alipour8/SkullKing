@@ -19,6 +19,7 @@ class SkullGame : public QMainWindow
 public:
    explicit SkullGame(QWidget *parent = nullptr);
     SkullGame(user me,QWidget *parent = nullptr);
+    SkullGame(QString name,QWidget *parent = nullptr);
     ~SkullGame();
 public slots:
     void connection();

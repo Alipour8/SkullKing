@@ -68,11 +68,11 @@ void sendMessageclient(QString tmp, QTcpSocket *socket){
 
 void PlayClient::on_pushButton_clicked()
 {
-    socket->connectToHost(ui->lineEdit->text(), 1234);
+    socket->connectToHost(ui->lineEdit->text(),8080);
     if(socket->waitForConnected())
-         ui->label_2->setText("connected");
+         ui->label_2->setText("Connected");
     else
-        ui->label_2->setText("error");
+        ui->label_2->setText("Error");
     ui->pushButton->hide();
     ui->lineEdit->hide();
 }
@@ -227,9 +227,9 @@ void PlayClient::readsocket(){
         ui->enemyvaluelbl->setText(command[2]);
     }
     if(command[0] == "play"){
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         Card tmp(command[2].toInt(), command[1]);
         tmp.setOwner("server");
@@ -396,9 +396,9 @@ void PlayClient::on_btn1_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         QString command = "play " + *itHandclient + " " + ui->lb1->text();
@@ -506,9 +506,9 @@ void PlayClient::on_btn2_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 1);
@@ -617,9 +617,9 @@ void PlayClient::on_btn3_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 2);
@@ -728,9 +728,9 @@ void PlayClient::on_btn4_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 3);
@@ -839,9 +839,9 @@ void PlayClient::on_btn5_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 4);
@@ -950,9 +950,9 @@ void PlayClient::on_btn6_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 5);
@@ -1061,9 +1061,9 @@ void PlayClient::on_btn7_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 6);
@@ -1172,9 +1172,9 @@ void PlayClient::on_btn8_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 7);
@@ -1283,9 +1283,9 @@ void PlayClient::on_btn9_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 8);
@@ -1394,9 +1394,9 @@ void PlayClient::on_btn10_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 9);
@@ -1505,9 +1505,9 @@ void PlayClient::on_btn11_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 10);
@@ -1727,9 +1727,9 @@ void PlayClient::on_btn13_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 12);
@@ -1838,9 +1838,9 @@ void PlayClient::on_btn14_clicked()
         }
     }
     else{
-        ui->enemylbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->enemylbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->enemyvaluelbl->clear();
-        ui->mycardlbl->setStyleSheet("border-radius:10px;\nborder:5px solid rgb(156, 0, 0);");
+        ui->mycardlbl->setStyleSheet("border-image: url(:/new/prefix1/CardFrame.jpg);\nborder-radius:10px;");
         ui->mycardvaluelbl->clear();
         itHandclient = Handclient.begin();
         advance(itHandclient, 13);
